@@ -44,7 +44,7 @@ services:
         source: ./contents
         target: /home/contents
 
-  mysql:
+  db:
     image: mysql:8.0
     ports:
       - target: 3306
