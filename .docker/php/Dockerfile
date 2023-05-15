@@ -1,6 +1,6 @@
-FROM php:8.1-fpm-bullseye AS base
+FROM php:8.2-fpm-bullseye AS base
 
-WORKDIR /contents
+WORKDIR /home
 
 # timezone environment
 ENV TZ=UTC \
@@ -22,6 +22,9 @@ RUN apt-get update \
     libzip-dev \
     libicu-dev \
     libonig-dev \
+    bash \
+    coreutils \
+    vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && locale-gen en_US.UTF-8 \
@@ -34,23 +37,19 @@ RUN apt-get update \
   && composer config -g process-timeout 3600 \
   && composer config -g repos.packagist composer https://packagist.org
 
+RUN apt-get -y update
+RUN apt-get install -y \
+    curl \
+    gnupg
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install npm@9 -g
+RUN npm install yarn -g
+
+RUN echo "alias ll='ls --color=auto -l'" >> /root/.bashrc \
+  && echo "alias ls='ls --color=auto'" >> /root/.bashrc \
+  && echo "alias la='ls --color=auto -lA'" >> /root/.bashrc
+
 FROM base AS development
 
 COPY ./.docker/php/php.development.ini /usr/local/etc/php/php.ini
-
-FROM development AS development-xdebug
-
-RUN pecl install xdebug && \
-  docker-php-ext-enable xdebug
-
-COPY ./.docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
-FROM base AS deploy
-
-COPY ./.docker/php/php.deploy.ini /usr/local/etc/php/php.ini
-COPY ./contents /contents
-
-RUN composer install -q -n --no-ansi --no-dev --no-scripts --no-progress --prefer-dist \
-  && chmod -R 777 storage bootstrap/cache \
-  && php artisan optimize:clear \
-  && php artisan optimize
