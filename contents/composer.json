@@ -51,7 +51,8 @@
             "@php artisan key:generate --ansi"
         ],
         "phpcs": "phpcs --standard=phpcs.xml",
-        "phpcbf": "phpcbf --standard=phpcs.xml"
+        "phpcbf": "phpcbf --standard=phpcs.xml",
+        "phpstan": "phpstan analyze -c phpstan.neon --memory-limit=-1"
     },
     "extra": {
         "laravel": {
