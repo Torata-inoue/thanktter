@@ -52,15 +52,13 @@ services:
         protocol: tcp
         mode: host
     volumes:
+      - ./.docker/mysql/setup.sql:/docker-entrypoint-initdb.d/setup.sql
       - type: volume
         source: db-store
         target: /var/lib/mysql
         volume:
           nocopy: true
     environment:
-      - MYSQL_DATABASE=${DB_DATABASE:-laravel}
-      - MYSQL_USER=${DB_USERNAME:-phper}
-      - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
 
   mailhog:
