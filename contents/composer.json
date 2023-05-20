@@ -52,7 +52,13 @@
         ],
         "phpcs": "phpcs --standard=phpcs.xml",
         "phpcbf": "phpcbf --standard=phpcs.xml",
-        "phpstan": "phpstan analyze -c phpstan.neon --memory-limit=-1"
+        "phpstan": "phpstan analyze -c phpstan.neon --memory-limit=-1",
+        "phpunit": "@php artisan test -d memory_limit=-1",
+        "ci": [
+            "phpunit",
+            "phpstan",
+            "phpcbf"
+        ]
     },
     "extra": {
         "laravel": {
