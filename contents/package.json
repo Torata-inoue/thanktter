@@ -32,7 +32,7 @@
         "build": "vite build",
         "eslint": "eslint --ext .tsx,.ts resources/ts/",
         "fmt": "prettier resources/ts/**/* --write",
-        "prettier-check": "prettier src/**/* --check",
+        "prettier-check": "prettier resources/ts/**/* --check",
         "ci": "yarn prettier-check && yarn eslint"
     }
 }
