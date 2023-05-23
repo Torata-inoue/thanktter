@@ -54,7 +54,7 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: PHPUnit
-        run: composer run test
+        run: composer run phpunit
         env:
           TESTING_DB_HOST: 127.0.0.1
           TESTING_DB_DATABASE: test
