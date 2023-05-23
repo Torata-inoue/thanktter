@@ -3,4 +3,4 @@
 use Illuminate\Routing\Router;
 
 /** @var Router $router */
-$router->get('/', fn() => view('app'));
+$router->get('/', fn() => view('welcome'));
