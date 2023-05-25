@@ -37,9 +37,9 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "eslint": "eslint --ext .tsx,.ts resources/ts/",
-        "fmt": "prettier resources/ts/**/* --write",
-        "prettier-check": "prettier src/**/* --check",
+        "eslint": "eslint --ext .tsx,.ts resources/ts/src/",
+        "fmt": "prettier resources/ts/src/**/* --write",
+        "prettier-check": "prettier resources/ts/src/**/* --check",
         "ci": "yarn prettier-check && yarn eslint"
     }
 }
