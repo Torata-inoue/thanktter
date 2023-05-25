@@ -33,7 +33,7 @@
     "processor": "disable/disable",
     "overrides": [
         {
-            "files": ["resources/ts/**/*.tsx"],
+            "files": ["resources/ts/src/**/*.tsx"],
             "settings": {
                 // アクセシビリティ系のプラグイン"jsx-a11y"のルールをすべて無効
                 // airbnbと依存関係にあるプラグインなのでプラグインごと無効にする

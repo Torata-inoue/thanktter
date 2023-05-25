@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin';
 
 // https://vitejs.dev/config/
+// https://readouble.com/laravel/10.x/ja/vite.html
 export default defineConfig({
   plugins: [
     laravel({
-      input: ['resources/ts/index.tsx'],
+      input: ['resources/ts/src/entries/app/index.tsx'],
       publicDirectory: 'htdocs',
       refresh: true,
     }),

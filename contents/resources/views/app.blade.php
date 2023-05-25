@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laravel Vite React TypeScript</title>
     @viteReactRefresh
-    @vite('resources/ts/index.tsx')
+    @vite('resources/ts/src/entries/app/index.tsx')
 </head>
 <body>
 <div id="react-root"></div>
