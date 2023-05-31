@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Vite React TypeScript</title>
+    <title>Laravel</title>
     @viteReactRefresh
     @vite('resources/ts/src/entries/app/index.tsx')
 </head>
-<body>
+<body style="margin: 0">
 <div id="react-root"></div>
 </body>
 </html>
