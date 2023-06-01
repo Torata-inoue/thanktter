@@ -9,7 +9,10 @@ services:
       dockerfile: ./.docker/php/Dockerfile
       target: ${APP_BUILD_TARGET:-development}
     ports:
+      # ViteのHMR用
       - "5173:5173"
+      # json-server用
+      - "3001:3001"
     volumes:
       - type: bind
         source: ./contents
