@@ -6,4 +6,4 @@ export type AuthType = {
   icon: string;
 };
 type FindAuthApiType = () => Promise<AuthType>;
-export const findAuthApi: FindAuthApiType = () => fetch<AuthType>('/auth', 'GET');
+export const findAuthApi: FindAuthApiType = () => fetch<AuthType>('//auth', 'GET');
