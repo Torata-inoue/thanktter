@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
-import {ErrorBoundary} from "react-error-boundary";
-import {Box, Container, Toolbar, Typography} from '@mui/material';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Box, Container, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import { AuthIcon } from './parts/AuthIcon';
-import {ErrorAuthIcon} from "./parts/ErrorAuthIcon";
-import {useErrorHandler} from "../../../hooks/error/userOnError";
+import { ErrorAuthIcon } from './parts/ErrorAuthIcon';
+import { useErrorHandler } from '../../../hooks/error/userOnError';
 
 export const Header: React.FC = () => {
   const errorHandler = useErrorHandler();
@@ -26,5 +26,5 @@ export const Header: React.FC = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  )
+  );
 };
