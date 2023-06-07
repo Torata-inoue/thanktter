@@ -6,14 +6,14 @@ import { PositionedMenu } from '../../menu/PositionedMenu';
 export const AuthIcon: React.FC = () => {
   const auth = useAuth();
 
-  const [isOpenMenu, setOpenMenu] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
-
-  const handleMenuClose: () => void = () => setOpenMenu(false);
 
   const handleMenu: (event: React.MouseEvent<HTMLElement>) => void = (event) => {
     setAnchorEl(event.currentTarget);
-    setOpenMenu((prevState) => !prevState);
+  };
+
+  const handleMenuClose: () => void = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -23,7 +23,7 @@ export const AuthIcon: React.FC = () => {
           <Avatar alt={auth.name} src={auth.icon} />
         </IconButton>
       </Tooltip>
-      <PositionedMenu anchorEl={anchorEl} isMenuOpen={isOpenMenu} handleMenuClose={handleMenuClose} />
+      <PositionedMenu anchorEl={anchorEl} handleMenuClose={handleMenuClose} />
     </>
   );
 };

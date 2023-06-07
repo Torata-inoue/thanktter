@@ -4,10 +4,9 @@ import { Links } from './Links';
 
 type PositionedMenuProps = {
   anchorEl: Element | null;
-  isMenuOpen: boolean;
   handleMenuClose: () => void;
 };
-export const PositionedMenu: React.FC<PositionedMenuProps> = ({ anchorEl, isMenuOpen, handleMenuClose }) => (
+export const PositionedMenu: React.FC<PositionedMenuProps> = ({ anchorEl, handleMenuClose }) => (
   <Menu
     anchorEl={anchorEl}
     anchorOrigin={{
@@ -19,7 +18,7 @@ export const PositionedMenu: React.FC<PositionedMenuProps> = ({ anchorEl, isMenu
       vertical: 'top',
       horizontal: 'right',
     }}
-    open={isMenuOpen}
+    open={Boolean(anchorEl)}
     onClose={handleMenuClose}
   >
     <Links handleMenuClose={handleMenuClose} />
