@@ -54,6 +54,7 @@
 
         // デフォルトエクスポートを許可しない
         "import/no-default-export": "error",
+        "import/prefer-default-export": ["off"],
 
         // jsx記法をtsxファイルでも許可
         "react/jsx-filename-extension": [
