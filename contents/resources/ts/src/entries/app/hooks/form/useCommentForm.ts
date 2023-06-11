@@ -1,4 +1,4 @@
-import {useForm, UseFormReturn} from "react-hook-form";
+import { useForm, UseFormReturn } from 'react-hook-form';
 
 export type CommentFormType = {
   authId: number;
@@ -12,25 +12,25 @@ export const useCommentForm: UseCommentFormType = () => {
   const methods = useForm<CommentFormType>({
     defaultValues: {
       nomineeIds: [],
-      images: []
-    }
+      images: [],
+    },
   });
 
   methods.register('nomineeIds', {
     required: '推薦者を選択してください',
     maxLength: {
       value: 10,
-      message: '推薦できるのは最大10人までです'
-    }
-  })
+      message: '推薦できるのは最大10人までです',
+    },
+  });
 
   methods.register('text', {
     required: '本文を入力してください',
     maxLength: {
       value: 1000,
-      message: '本文は最大1000文字までです'
-    }
-  })
+      message: '本文は最大1000文字までです',
+    },
+  });
 
   return methods;
-}
+};
