@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as IlluminateController;
 
-class Controller extends BaseController
+class BaseController extends IlluminateController
 {
     use AuthorizesRequests, ValidatesRequests;
 }

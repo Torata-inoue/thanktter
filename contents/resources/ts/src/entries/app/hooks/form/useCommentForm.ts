@@ -1,7 +1,6 @@
 import { useForm, UseFormReturn } from 'react-hook-form';
 
 export type CommentFormType = {
-  authId: number;
   text: string;
   nomineeIds: number[];
   images: string[];

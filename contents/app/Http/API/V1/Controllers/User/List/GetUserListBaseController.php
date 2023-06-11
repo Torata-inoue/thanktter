@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\User\List;
+namespace App\Http\API\V1\Controllers\User\List;
 
-use App\Http\Controllers\Controller;
+use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 
-class GetUserListController extends Controller
+class GetUserListBaseController extends BaseController
 {
     public function getUserList(): JsonResponse
     {

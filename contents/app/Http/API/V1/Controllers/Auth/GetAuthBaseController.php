@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Auth;
+namespace App\Http\API\V1\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 
-class GetAuthController extends Controller
+class GetAuthBaseController extends BaseController
 {
     public function getAuth(): JsonResponse
     {
