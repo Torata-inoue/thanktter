@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->group([
             'prefix' => 'api',
-            'middleware' => 'api'
+            'middleware' => 'web'
         ], function (Router $router) {
             $router->group(['prefix' => 'v1'], function (Router $router) {
                 require base_path('routes/api/v1.php');

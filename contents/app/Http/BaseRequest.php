@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BaseRequest extends FormRequest
@@ -53,5 +54,17 @@ class BaseRequest extends FormRequest
     public function attributes(): array
     {
         return $this->formAttributes;
+    }
+
+    final protected function prepareForValidation(): void
+    {
+        $validator = $this->getValidatorInstance();
+        parent::prepareForValidation();
+        $this->prepareValidate($validator);
+    }
+
+    protected function prepareValidate(Validator $validator): void
+    {
+        //
     }
 }
