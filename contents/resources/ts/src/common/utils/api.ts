@@ -31,7 +31,7 @@ const handleApiError: HandleApiErrorType = (error) => {
   }
   // eslint-disable-next-line no-alert
   alert(message);
-}
+};
 
 type ResponseData<T> = {
   data: T;
@@ -42,7 +42,7 @@ type ResponseData<T> = {
 };
 type AxiosErrorDataType = {
   message: string;
-}
+};
 async function api<T>(path: string, method: 'GET' | 'POST', config?: AxiosRequestConfig): Promise<T> {
   let response: AxiosResponse<ResponseData<T>>;
 
@@ -62,7 +62,7 @@ async function api<T>(path: string, method: 'GET' | 'POST', config?: AxiosReques
   }
 
   if (response.data.error) {
-    const {message, status} = response.data.error;
+    const { message, status } = response.data.error;
     throw new ApplicationError(message, status);
   }
 
