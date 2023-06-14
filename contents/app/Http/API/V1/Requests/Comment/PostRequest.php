@@ -3,12 +3,11 @@
 namespace App\Http\API\V1\Requests\Comment;
 
 use App\Http\BaseRequest;
-use Illuminate\Contracts\Validation\Validator;
 
 class PostRequest extends BaseRequest
 {
     protected array $rules = [
-        'text' => 'required|string|max:10',
+        'text' => 'string|max:1000',
         'nomineeIds' => 'array|max:10',
         'nomineeIds.*' => 'required|int|min:0',
         'images' => 'array|max:4',
@@ -20,9 +19,4 @@ class PostRequest extends BaseRequest
         'nomineeIds' => '推薦者',
         'images' => '画像',
     ];
-
-    protected function prepareValidate(Validator $validator): void
-    {
-//        dd($validator);
-    }
 }

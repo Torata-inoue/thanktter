@@ -6,12 +6,16 @@ import { SelectUser } from './selectUser/SelectUser';
 import { CommentFormType, useCommentForm } from '../../../hooks/form/useCommentForm';
 import { TextInput } from './textInput/TextInput';
 import { Form } from '../../form/Form';
+import { postCommentApi } from '../../../features/comment/post';
+import { handleApiError } from '../../../../../common/utils/api';
 
 export const CommentForm: React.FC = () => {
   const methods = useCommentForm();
 
   const onSubmitHandler: SubmitHandler<CommentFormType> = (data) => {
-    console.log(data);
+    postCommentApi(data)
+      .then((res) => console.log(res))
+      .catch(handleApiError);
   };
 
   return (

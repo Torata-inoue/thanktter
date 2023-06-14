@@ -54,8 +54,9 @@ async function api<T>(path: string, method: 'GET' | 'POST', config?: AxiosReques
     }
   } catch (error) {
     if (error instanceof AxiosError<AxiosErrorDataType, unknown>) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-      throw new ApplicationError(error.response?.data.message, error.status as number);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
+      const message: string = error.response ? error.response.data.message : '通信エラー';
+      throw new ApplicationError(message, error.status as number);
     }
 
     throw error;

@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import { Loadable } from '../../../../../../common/utils/loadable';
-import { UserType } from '../../../../../../common/features/user/get';
+import { UserType } from '../../../../features/user/get';
 import { CommentFormType } from '../../../../hooks/form/useCommentForm';
 import { ValidationMessage } from '../../../form/ValidationMessage';
 
