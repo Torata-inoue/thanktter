@@ -8,6 +8,7 @@ import { TextInput } from './textInput/TextInput';
 import { Form } from '../../form/Form';
 import { postCommentApi } from '../../../features/comment/post';
 import { handleApiError } from '../../../../../common/utils/api';
+import { ImageUploader } from './image/ImageUploader';
 
 export const CommentForm: React.FC = () => {
   const methods = useCommentForm();
@@ -24,7 +25,9 @@ export const CommentForm: React.FC = () => {
         <FormProvider {...methods}>
           <Form<CommentFormType> onSubmit={onSubmitHandler}>
             <SelectUser />
-            <TextInput />
+            <ImageUploader>
+              <TextInput />
+            </ImageUploader>
             <Button type="submit" variant="contained" endIcon={<Send />}>
               送信する
             </Button>

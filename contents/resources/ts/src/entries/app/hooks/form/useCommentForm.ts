@@ -3,7 +3,7 @@ import { useForm, UseFormReturn } from 'react-hook-form';
 export type CommentFormType = {
   text: string;
   nomineeIds: number[];
-  images: string[];
+  images: File[];
 };
 
 type UseCommentFormType = () => UseFormReturn<CommentFormType>;
@@ -28,6 +28,13 @@ export const useCommentForm: UseCommentFormType = () => {
     maxLength: {
       value: 1000,
       message: '本文は最大1000文字までです',
+    },
+  });
+
+  methods.register('images', {
+    max: {
+      value: 4,
+      message: '添付できる画像は最大4枚までです',
     },
   });
 
