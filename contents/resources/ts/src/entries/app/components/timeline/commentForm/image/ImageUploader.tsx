@@ -1,32 +1,9 @@
 import React, { useState } from 'react';
-import { ImageListItem as MuiImageListItem, ImageList as MuiImageList } from '@mui/material';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { TextDiv } from '../../../../../../common/components/Text/TextDiv';
 import { CommentFormType } from '../../../../hooks/form/useCommentForm';
 import { ValidationMessage } from '../../../form/ValidationMessage';
-
-type CalcImageHeightType = (length: number) => number;
-const calcImageHeight: CalcImageHeightType = (length) => {
-  const imageHeight = 125;
-  if ([3, 4].includes(length)) {
-    return imageHeight * 2;
-  }
-  return imageHeight;
-};
-
-type ImageListProps = { imageFiles: File[]; removeImage: (index: number) => void };
-const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage }) => (
-  <MuiImageList sx={{ width: 300, height: calcImageHeight(imageFiles.length) }} cols={2} rowHeight={125}>
-    {imageFiles.map((file, index) => (
-      <MuiImageListItem key={file.name}>
-        <img src={`${URL.createObjectURL(file)}`} alt={file.name} loading="lazy" style={{ objectFit: 'cover' }} />
-        <button type="button" onClick={() => removeImage(index)}>
-          削除
-        </button>
-      </MuiImageListItem>
-    ))}
-  </MuiImageList>
-);
+import { ImageList } from '../../image/ImageList';
 
 type ImageUploaderProps = { children: React.ReactNode };
 export const ImageUploader: React.FC<ImageUploaderProps> = ({ children }) => {
