@@ -8,7 +8,7 @@ import { ImageList } from '../../image/ImageList';
 type ImageUploaderProps = { children: React.ReactNode };
 export const ImageUploader: React.FC<ImageUploaderProps> = ({ children }) => {
   const [drag, setDrag] = useState<boolean>(false);
-  const { setValue, getValues, control } = useFormContext<CommentFormType>();
+  const { setValue, getValues, control, trigger } = useFormContext<CommentFormType>();
 
   const imageFiles = useWatch<CommentFormType>({ control, name: 'images' }) as File[];
   const removeImage: (index: number) => void = (index) => {
@@ -25,10 +25,10 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ children }) => {
   };
 
   const handleOnDrop: React.DragEventHandler<HTMLDivElement> = (event) => {
-    // TODO バリデーション
-    setValue('images', [...event.dataTransfer.files]);
+    setValue('images', [...getValues('images'), ...event.dataTransfer.files]);
     setDrag(false);
     event.preventDefault();
+    trigger('images').catch(() => '');
   };
 
   const handleOnDragLeave: React.DragEventHandler<HTMLDivElement> = () => {

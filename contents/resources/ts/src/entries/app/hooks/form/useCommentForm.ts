@@ -32,9 +32,11 @@ export const useCommentForm: UseCommentFormType = () => {
   });
 
   methods.register('images', {
-    max: {
-      value: 4,
-      message: '添付できる画像は最大4枚までです',
+    validate: {
+      lessThanFour: (files) => files.length <= 4 || '添付できる画像は最大4枚までです',
+      extension: (files) =>
+        files.every((file) => ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'].includes(file.type)) ||
+        'jpg, png, gif以外のファイルを添付することはできません',
     },
   });
 

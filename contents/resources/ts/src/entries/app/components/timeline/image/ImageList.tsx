@@ -27,7 +27,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ open, src, handleOnClose }) => 
 type CalcImageHeightType = (length: number) => number;
 const calcImageHeight: CalcImageHeightType = (length) => {
   const imageHeight = 125;
-  if ([3, 4].includes(length)) {
+  if (length > 2) {
     return imageHeight * 2;
   }
   return imageHeight;
@@ -45,6 +45,11 @@ export const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage })
   const handleOnClick: (imageUrl: string) => React.MouseEventHandler<HTMLLIElement> = (imageUrl) => () => {
     setOpen(true);
     setSrc(imageUrl);
+  };
+
+  const handleOnRemove: (index: number) => React.MouseEventHandler<HTMLButtonElement> = (index) => (event) => {
+    event.stopPropagation();
+    removeImage(index);
   };
 
   const handleOnClose: () => void = () => {
@@ -66,7 +71,7 @@ export const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage })
               <IconButton
                 sx={{ position: 'absolute', top: 2, right: 2, zIndex: 1 }}
                 size="small"
-                onClick={() => removeImage(index)}
+                onClick={handleOnRemove(index)}
               >
                 <DeleteOutline />
               </IconButton>
