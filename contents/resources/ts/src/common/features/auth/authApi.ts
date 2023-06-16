@@ -1,4 +1,4 @@
-import { fetch } from '../../utils/api';
+import { api } from '../../utils/api';
 
 export type AuthType = {
   id: number;
@@ -6,4 +6,4 @@ export type AuthType = {
   icon: string;
 };
 type FindAuthApiType = () => Promise<AuthType>;
-export const findAuthApi: FindAuthApiType = () => fetch<AuthType>('/auth', 'GET');
+export const findAuthApi: FindAuthApiType = () => api<AuthType>('/auth', 'GET');
