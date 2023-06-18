@@ -10,6 +10,7 @@ $router->group(['prefix' => 'user'], function (Router $router) {
 });
 
 $router->group(['prefix' => 'comment'], function (Router $router) {
+    $router->get('/', [\App\Http\API\V1\Controllers\Comment\GetController::class, 'getComments']);
     $router->post('/', [\App\Http\API\V1\Controllers\Comment\PostController::class, 'post']);
 });
 
