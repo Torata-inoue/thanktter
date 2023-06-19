@@ -10,7 +10,7 @@ class GetController extends BaseController
 {
     public function getComments(): JsonResponse
     {
-        return new JsonResponse([
+        $data = [
             [
                 'id' => 10,
                 'text' => 'ありがとう',
@@ -55,6 +55,7 @@ class GetController extends BaseController
                     ]
                 ],
             ]
-        ]);
+        ];
+        return new JsonResponse(compact('data'));
     }
 }
