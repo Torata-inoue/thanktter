@@ -1,14 +1,21 @@
 import React from 'react';
 import { Card, CardContent } from '@mui/material';
 import { CommentType } from '../../../constants/comment';
+import { User } from './cardContent/User';
 
-type CommentCardProps = { comment: CommentType };
+type CommentCardProps = CommentType;
 export const CommentCard: React.FC<CommentCardProps> = ({
-  comment: { id, text, createdAt, user, replies, reactions, nominees },
+  id,
+  text,
+  createdAt,
+  user,
+  replies,
+  reactions,
+  nominees,
 }) => (
   <Card>
     <CardContent>
-      <div>{text}</div>
+      <User {...user} />
     </CardContent>
   </Card>
 );

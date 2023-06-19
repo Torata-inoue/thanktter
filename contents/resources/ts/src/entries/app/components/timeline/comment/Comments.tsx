@@ -10,7 +10,7 @@ const Loaded: React.FC = () => {
   return (
     <>
       {comments.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} />
+        <CommentCard key={comment.id} {...comment} />
       ))}
     </>
   );
