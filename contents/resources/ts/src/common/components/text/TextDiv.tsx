@@ -12,7 +12,7 @@ const Div = styled('div')<DivProps>(({ theme, textAlign }) => ({
 }));
 
 type TextDivProps = {
-  children: string;
+  children: React.ReactNode;
   textAlign?: 'right' | 'left' | 'center';
 };
 export const TextDiv: React.FC<TextDivProps> = ({ children, textAlign = 'left' }) => (

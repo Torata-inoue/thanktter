@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card, CardContent } from '@mui/material';
 import { CommentType } from '../../../constants/comment';
-import { User } from './cardContent/User';
+import { User } from './cardContent/user/User';
+import { TextDiv } from '../../../../../common/components/text/TextDiv';
+import { Nominees } from './cardContent/nominee/Nominees';
 
 type CommentCardProps = CommentType;
 export const CommentCard: React.FC<CommentCardProps> = ({
@@ -16,6 +18,9 @@ export const CommentCard: React.FC<CommentCardProps> = ({
   <Card>
     <CardContent>
       <User {...user} />
+      <TextDiv textAlign="right">{createdAt}</TextDiv>
+      <Nominees nominees={nominees} />
+      <TextDiv>{text}</TextDiv>
     </CardContent>
   </Card>
 );
