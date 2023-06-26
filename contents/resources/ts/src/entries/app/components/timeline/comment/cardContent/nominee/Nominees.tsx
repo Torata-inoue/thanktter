@@ -55,8 +55,8 @@ type NomineesProps = { nominees: UserType[] };
 export const Nominees: React.FC<NomineesProps> = ({ nominees }) => (
   <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
     {nominees.map((user) => (
-      <ReactionForm userId={user.id}>
-        <Nominee key={user.name} {...user} />
+      <ReactionForm key={user.id} userId={user.id}>
+        <Nominee {...user} />
       </ReactionForm>
     ))}
   </Box>

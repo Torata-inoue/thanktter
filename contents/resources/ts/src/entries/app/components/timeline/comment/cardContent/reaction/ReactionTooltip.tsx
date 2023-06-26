@@ -1,8 +1,9 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Box, IconButton, SxProps, Theme, Tooltip } from '@mui/material';
+import { IconButton, SxProps, Theme, Tooltip } from '@mui/material';
 import { ReactionNameType, reactions, reactionsObject } from '../../../../../constants/reactions';
 import { ReactionFormType } from '../../../../../hooks/form/useReactionForm';
+import { ReactionForm } from './ReactionForm';
 
 const iconSx: SxProps<Theme> = {
   backgroundColor: (theme) => theme.palette.primary.main,
@@ -10,22 +11,21 @@ const iconSx: SxProps<Theme> = {
   borderRadius: '50%',
 };
 const Buttons: React.FC = () => {
-  const { setValue } = useFormContext<ReactionFormType>();
+  const { setValue, getValues } = useFormContext<ReactionFormType>();
+  const userId = getValues('userId');
 
   const handleOnClick: (name: ReactionNameType) => React.MouseEventHandler = (name) => () => {
     setValue('type', reactionsObject[name]);
   };
 
   return (
-    <Box>
+    <ReactionForm userId={userId}>
       {reactions.map(({ Component, name }) => (
-        <Tooltip key={name} title={name}>
-          <IconButton type="submit" onClick={handleOnClick(name)}>
-            <Component sx={iconSx} />
-          </IconButton>
-        </Tooltip>
+        <IconButton key={name} type="submit" onClick={handleOnClick(name)}>
+          <Component sx={iconSx} />
+        </IconButton>
       ))}
-    </Box>
+    </ReactionForm>
   );
 };
 
