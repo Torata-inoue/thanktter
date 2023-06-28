@@ -10,7 +10,8 @@ const iconSx: SxProps<Theme> = {
   color: (theme) => theme.palette.background.paper,
   borderRadius: '50%',
 };
-const Buttons: React.FC = () => {
+type ButtonsProps = { commentId: number };
+const Buttons: React.FC<ButtonsProps> = ({ commentId }) => {
   const { setValue, getValues } = useFormContext<ReactionFormType>();
   const userId = getValues('userId');
 
@@ -19,7 +20,7 @@ const Buttons: React.FC = () => {
   };
 
   return (
-    <ReactionForm userId={userId}>
+    <ReactionForm userId={userId} commentId={commentId}>
       {reactions.map(({ Component, name }) => (
         <IconButton key={name} type="submit" onClick={handleOnClick(name)}>
           <Component sx={iconSx} />
@@ -29,9 +30,9 @@ const Buttons: React.FC = () => {
   );
 };
 
-type ReactionTooltipType = { children: React.ReactElement };
-export const ReactionTooltip: React.FC<ReactionTooltipType> = ({ children }) => (
-  <Tooltip title={<Buttons />} placement="top">
+type ReactionTooltipType = { children: React.ReactElement; commentId: number };
+export const ReactionTooltip: React.FC<ReactionTooltipType> = ({ children, commentId }) => (
+  <Tooltip title={<Buttons commentId={commentId} />} placement="top">
     {children}
   </Tooltip>
 );

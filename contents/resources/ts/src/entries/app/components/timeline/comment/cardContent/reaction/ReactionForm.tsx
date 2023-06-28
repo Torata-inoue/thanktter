@@ -2,13 +2,27 @@ import React from 'react';
 import { FormProvider, SubmitHandler } from 'react-hook-form';
 import { ReactionFormType, useReactionForm } from '../../../../../hooks/form/useReactionForm';
 import { Form } from '../../../../form/Form';
+import { postReaction } from '../../../../../features/reaction/post';
+import { handleApiError } from '../../../../../../../common/utils/api';
+import { useAuth, useSetAuth } from '../../../../../../../common/states/atoms/auth';
 
-type ReactionFormProps = { children: React.ReactNode; userId: number };
-export const ReactionForm: React.FC<ReactionFormProps> = ({ children, userId }) => {
-  const methods = useReactionForm(userId);
+type ReactionFormProps = { children: React.ReactNode; userId: number; commentId: number };
+export const ReactionForm: React.FC<ReactionFormProps> = ({ children, userId, commentId }) => {
+  console.log(commentId);
+  const methods = useReactionForm(userId, commentId);
+  const auth = useAuth();
+  const setAuth = useSetAuth();
 
   const onSubmit: SubmitHandler<ReactionFormType> = (data) => {
-    console.log(data);
+    if (auth.stamina === 0) {
+      alert('スタミナが足りません');
+      return;
+    }
+    postReaction(data)
+      .then((res) => {
+        setAuth(res.auth);
+      })
+      .catch(handleApiError);
   };
 
   return (

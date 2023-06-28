@@ -21,8 +21,8 @@ const BadgeContent: React.FC = () => (
   />
 );
 
-type NomineeProps = UserType;
-const Nominee: React.FC<NomineeProps> = ({ id, icon, name }) => {
+type NomineeProps = { user: UserType; commentId: number };
+const Nominee: React.FC<NomineeProps> = ({ user: { id, name, icon }, commentId }) => {
   const { setValue } = useFormContext<ReactionFormType>();
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -31,7 +31,7 @@ const Nominee: React.FC<NomineeProps> = ({ id, icon, name }) => {
 
   return (
     <Box sx={{ textAlign: 'center' }}>
-      <ReactionTooltip>
+      <ReactionTooltip commentId={commentId}>
         <IconButton type="submit" onClick={handleOnClick}>
           <Badge
             overlap="circular"
@@ -51,12 +51,12 @@ const Nominee: React.FC<NomineeProps> = ({ id, icon, name }) => {
   );
 };
 
-type NomineesProps = { nominees: UserType[] };
-export const Nominees: React.FC<NomineesProps> = ({ nominees }) => (
+type NomineesProps = { nominees: UserType[]; commentId: number };
+export const Nominees: React.FC<NomineesProps> = ({ nominees, commentId }) => (
   <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
     {nominees.map((user) => (
-      <ReactionForm key={user.id} userId={user.id}>
-        <Nominee {...user} />
+      <ReactionForm key={user.id} userId={user.id} commentId={commentId}>
+        <Nominee user={user} commentId={commentId} />
       </ReactionForm>
     ))}
   </Box>

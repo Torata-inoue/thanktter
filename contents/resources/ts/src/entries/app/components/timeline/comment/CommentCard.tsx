@@ -19,7 +19,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
     <CardContent>
       <User {...user} />
       <TextDiv textAlign="right">{createdAt}</TextDiv>
-      <Nominees nominees={nominees} />
+      <Nominees nominees={nominees} commentId={id} />
       <TextDiv>{text}</TextDiv>
     </CardContent>
   </Card>
