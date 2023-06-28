@@ -37,7 +37,7 @@ class BaseRequest extends FormRequest
      */
     public function rules(): array
     {
-        return $this->rules;
+        return ['data' => $this->rules];
     }
 
     /**

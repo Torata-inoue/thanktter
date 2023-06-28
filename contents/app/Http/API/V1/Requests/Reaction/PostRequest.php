@@ -7,8 +7,8 @@ use App\Http\BaseRequest;
 class PostRequest extends BaseRequest
 {
     protected array $rules = [
-        'commentId' => 'required|int',
-        'userId' => 'required|int',
-        'type' => 'required|int',
+        'commentId' => ['required', 'int'],
+        'userId' => ['required', 'int'],
+        'type' => ['required', 'int'],
     ];
 }
