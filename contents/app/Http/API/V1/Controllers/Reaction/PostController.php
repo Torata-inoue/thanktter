@@ -11,7 +11,7 @@ class PostController extends BaseController
 {
     public function postReaction(PostRequest $request): JsonResponse
     {
-//        $data = $request->input();
+//        $request->getValidData();
 
         $data = [
             'auth' => [
