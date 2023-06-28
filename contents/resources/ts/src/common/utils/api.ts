@@ -26,6 +26,7 @@ const handleApiError: HandleApiErrorType = (error) => {
   if (!(error instanceof ApplicationError)) {
     // TODO サーバーサイドへログを投げる
     message = '通信エラー';
+    console.log(error);
   } else {
     message = error.message;
   }

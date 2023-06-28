@@ -5,13 +5,14 @@ import { Form } from '../../../../form/Form';
 import { postReaction } from '../../../../../features/reaction/post';
 import { handleApiError } from '../../../../../../../common/utils/api';
 import { useAuth, useSetAuth } from '../../../../../../../common/states/atoms/auth';
+import { useSetComment } from '../../../../../states/atoms/comment';
 
 type ReactionFormProps = { children: React.ReactNode; userId: number; commentId: number };
 export const ReactionForm: React.FC<ReactionFormProps> = ({ children, userId, commentId }) => {
-  console.log(commentId);
   const methods = useReactionForm(userId, commentId);
   const auth = useAuth();
   const setAuth = useSetAuth();
+  const setComment = useSetComment(commentId);
 
   const onSubmit: SubmitHandler<ReactionFormType> = (data) => {
     if (auth.stamina === 0) {
@@ -21,6 +22,7 @@ export const ReactionForm: React.FC<ReactionFormProps> = ({ children, userId, co
     postReaction(data)
       .then((res) => {
         setAuth(res.auth);
+        setComment(res.comment);
       })
       .catch(handleApiError);
   };

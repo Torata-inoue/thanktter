@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { atom, DefaultValue, selector, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom, atomFamily, DefaultValue, selector, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil';
 import { CommentType } from '../../constants/comment';
 import { recoilKeys } from '../recoilKeys';
 import { findCommentAPI, getCommentsAPI } from '../../features/comment/get';
@@ -9,22 +9,28 @@ const pageState = atom<number>({
   default: 1,
 });
 
+const commentsState = atomFamily<CommentType[], number>({
+  key: recoilKeys.APP_COMMENTS,
+  default: (page) => getCommentsAPI(page),
+});
+
 const commentsSelector = selector<CommentType[]>({
   key: recoilKeys.APP_COMMENTS_SELECTOR,
   get: ({ get }) => {
     const page = get(pageState);
-    return getCommentsAPI(page);
+    return get(commentsState(page));
   },
-  set: ({ set }, newValue) => {
+  set: ({ set, get }, newValue) => {
     if (newValue instanceof DefaultValue) {
       return;
     }
-    set(commentsSelector, newValue);
+    const page = get(pageState);
+    set(commentsState(page), newValue);
   },
 });
 
-const commentState = selectorFamily<CommentType, number>({
-  key: recoilKeys.APP_COMMENT,
+const commentSelector = selectorFamily<CommentType, number>({
+  key: recoilKeys.APP_COMMENT_SELECTOR,
   get:
     (commentId) =>
     ({ get }) => {
@@ -36,11 +42,14 @@ const commentState = selectorFamily<CommentType, number>({
     },
   set:
     (commentId) =>
-    ({ set }, newValue) => {
+    ({ set, get }, newValue) => {
       if (newValue instanceof DefaultValue) {
         return;
       }
-      set(commentsSelector, (prevValue) => prevValue.map((comment) => (comment.id === commentId ? newValue : comment)));
+      const page = get(pageState);
+      set(commentsState(page), (prevValue) =>
+        prevValue.map((comment) => (comment.id === commentId ? newValue : comment))
+      );
     },
 });
 
@@ -49,7 +58,7 @@ export const useGetComments: UseGetCommentsType = () => useRecoilValue(commentsS
 
 type UseSetCommentType = (commentId: number) => (comment: CommentType) => void;
 export const useSetComment: UseSetCommentType = (commentId) => {
-  const setComment = useSetRecoilState(commentState(commentId));
+  const setComment = useSetRecoilState(commentSelector(commentId));
   return useCallback(
     (comment) => {
       setComment(comment);
