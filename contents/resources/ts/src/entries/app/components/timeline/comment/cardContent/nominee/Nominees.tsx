@@ -26,7 +26,7 @@ const Nominee: React.FC<NomineeProps> = ({ user: { id, name, icon }, commentId }
   const { setValue } = useFormContext<ReactionFormType>();
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = () => {
-    setValue('type', reactionsObject.good);
+    setValue('type', reactionsObject.good.type);
   };
 
   return (

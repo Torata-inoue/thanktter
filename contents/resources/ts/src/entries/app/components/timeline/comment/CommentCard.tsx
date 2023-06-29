@@ -4,6 +4,7 @@ import { CommentType } from '../../../constants/comment';
 import { User } from './cardContent/user/User';
 import { TextDiv } from '../../../../../common/components/text/TextDiv';
 import { Nominees } from './cardContent/nominee/Nominees';
+import { ReactionsBar } from './cardContent/reaction/ReactionsBar';
 
 type CommentCardProps = CommentType;
 export const CommentCard: React.FC<CommentCardProps> = ({
@@ -21,6 +22,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
       <TextDiv textAlign="right">{createdAt}</TextDiv>
       <Nominees nominees={nominees} commentId={id} />
       <TextDiv>{text}</TextDiv>
+      <ReactionsBar reactions={reactions} />
     </CardContent>
   </Card>
 );

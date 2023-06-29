@@ -1,9 +1,10 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { IconButton, SxProps, Theme, Tooltip } from '@mui/material';
-import { ReactionNameType, reactions, reactionsObject } from '../../../../../constants/reactions';
+import { Box, IconButton, SxProps, Theme, Tooltip } from '@mui/material';
+import { ReactionKeyType, reactions, reactionsObject } from '../../../../../constants/reactions';
 import { ReactionFormType } from '../../../../../hooks/form/useReactionForm';
 import { ReactionForm } from './ReactionForm';
+import { TextDiv } from '../../../../../../../common/components/text/TextDiv';
 
 const iconSx: SxProps<Theme> = {
   backgroundColor: (theme) => theme.palette.primary.main,
@@ -15,14 +16,14 @@ const Buttons: React.FC<ButtonsProps> = ({ commentId }) => {
   const { setValue, getValues } = useFormContext<ReactionFormType>();
   const userId = getValues('userId');
 
-  const handleOnClick: (name: ReactionNameType) => React.MouseEventHandler = (name) => () => {
-    setValue('type', reactionsObject[name]);
+  const handleOnClick: (key: ReactionKeyType) => React.MouseEventHandler = (key) => () => {
+    setValue('type', reactionsObject[key].type);
   };
 
   return (
     <ReactionForm userId={userId} commentId={commentId}>
-      {reactions.map(({ Component, name }) => (
-        <IconButton key={name} type="submit" onClick={handleOnClick(name)}>
+      {reactions.map(({ Component, key }) => (
+        <IconButton key={key} title={key} type="submit" onClick={handleOnClick(key)}>
           <Component sx={iconSx} />
         </IconButton>
       ))}
