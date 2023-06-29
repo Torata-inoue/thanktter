@@ -1,7 +1,7 @@
 import { UserType } from './user';
 import { ReactionKeyType } from './reactions';
 
-type ReplyType = {
+export type ReplyType = {
   user: UserType;
   text: string;
 };
