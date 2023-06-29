@@ -4,13 +4,12 @@ import { Box, IconButton, SxProps, Theme, Tooltip } from '@mui/material';
 import { ReactionKeyType, reactions, reactionsObject } from '../../../../../constants/reactions';
 import { ReactionFormType } from '../../../../../hooks/form/useReactionForm';
 import { ReactionForm } from './ReactionForm';
-import { TextDiv } from '../../../../../../../common/components/text/TextDiv';
 
-const iconSx: SxProps<Theme> = {
-  backgroundColor: (theme) => theme.palette.primary.main,
+const iconSx: (key: ReactionKeyType) => SxProps<Theme> = (key) => ({
+  backgroundColor: reactionsObject[key].color,
   color: (theme) => theme.palette.background.paper,
   borderRadius: '50%',
-};
+});
 type ButtonsProps = { commentId: number };
 const Buttons: React.FC<ButtonsProps> = ({ commentId }) => {
   const { setValue, getValues } = useFormContext<ReactionFormType>();
@@ -24,7 +23,7 @@ const Buttons: React.FC<ButtonsProps> = ({ commentId }) => {
     <ReactionForm userId={userId} commentId={commentId}>
       {reactions.map(({ Component, key }) => (
         <IconButton key={key} title={key} type="submit" onClick={handleOnClick(key)}>
-          <Component sx={iconSx} />
+          <Component sx={iconSx(key)} />
         </IconButton>
       ))}
     </ReactionForm>

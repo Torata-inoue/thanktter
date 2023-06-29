@@ -13,7 +13,7 @@ import { ReactionForm } from '../reaction/ReactionForm';
 const BadgeContent: React.FC = () => (
   <ThumbUpAlt
     sx={{
-      backgroundColor: (theme) => theme.palette.primary.main,
+      backgroundColor: reactionsObject.good.color,
       color: (theme) => theme.palette.background.paper,
       borderRadius: '50%',
     }}
