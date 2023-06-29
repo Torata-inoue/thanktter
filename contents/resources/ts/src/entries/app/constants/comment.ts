@@ -1,5 +1,5 @@
 import { UserType } from './user';
-import { ReactionNameType } from './reactions';
+import { ReactionKeyType } from './reactions';
 
 type ReplyType = {
   user: UserType;
@@ -13,7 +13,7 @@ export type CommentType = {
   user: UserType;
   nominees: UserType[];
   reactions: {
-    [name in ReactionNameType]: number;
+    [name in ReactionKeyType]: number;
   };
   replies: ReplyType[];
 };
