@@ -36,11 +36,11 @@ export const LoginForm: React.FC = () => {
             </Button>
           </Box>
           <TextDiv>
-            <Link underline="none" component={RouterLink} to="register">
+            <Link underline="none" component={RouterLink} to="/register">
               新規登録はこちら
             </Link>
             <br />
-            <Link underline="none" component={RouterLink} to="reset">
+            <Link underline="none" component={RouterLink} to="/reset">
               パスワードを忘れた方はこちら
             </Link>
           </TextDiv>
