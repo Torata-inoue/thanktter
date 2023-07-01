@@ -6,8 +6,8 @@ import { ReplyFormType, useReplyForm } from '../../../../../../hooks/form/useRep
 import { useSetComment } from '../../../../../../states/atoms/comment';
 import { postReplyApi } from '../../../../../../features/comment/post';
 import { handleApiError } from '../../../../../../../../common/utils/api';
-import {Form} from "../../../../../../../../common/components/form/Form";
-import {ValidationMessage} from "../../../../../../../../common/components/form/ValidationMessage";
+import { Form } from '../../../../../../../../common/components/form/Form';
+import { ValidationMessage } from '../../../../../../../../common/components/form/ValidationMessage';
 
 type ReplyFormProps = { commentId: number };
 const Component: React.FC<ReplyFormProps> = ({ commentId }) => {

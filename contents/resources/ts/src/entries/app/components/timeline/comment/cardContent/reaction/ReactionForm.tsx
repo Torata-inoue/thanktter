@@ -5,7 +5,7 @@ import { postReaction } from '../../../../../features/reaction/post';
 import { handleApiError } from '../../../../../../../common/utils/api';
 import { useAuth, useSetAuth } from '../../../../../../../common/states/atoms/auth';
 import { useSetComment } from '../../../../../states/atoms/comment';
-import {Form} from "../../../../../../../common/components/form/Form";
+import { Form } from '../../../../../../../common/components/form/Form';
 
 type ReactionFormProps = { children: React.ReactNode; userId: number; commentId: number };
 export const ReactionForm: React.FC<ReactionFormProps> = ({ children, userId, commentId }) => {

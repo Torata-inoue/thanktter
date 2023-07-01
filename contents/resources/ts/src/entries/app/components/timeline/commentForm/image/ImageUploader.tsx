@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { TextDiv } from '../../../../../../common/components/text/TextDiv';
 import { CommentFormType } from '../../../../hooks/form/useCommentForm';
 import { ImageList } from '../../image/ImageList';
-import {ValidationMessage} from "../../../../../../common/components/form/ValidationMessage";
+import { ValidationMessage } from '../../../../../../common/components/form/ValidationMessage';
 
 type ImageUploaderProps = { children: React.ReactNode };
 export const ImageUploader: React.FC<ImageUploaderProps> = ({ children }) => {

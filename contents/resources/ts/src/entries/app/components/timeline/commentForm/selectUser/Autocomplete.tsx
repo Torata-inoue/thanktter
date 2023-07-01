@@ -12,7 +12,7 @@ import {
 import { Loadable } from '../../../../../../common/utils/loadable';
 import { CommentFormType } from '../../../../hooks/form/useCommentForm';
 import { UserType } from '../../../../constants/user';
-import {ValidationMessage} from "../../../../../../common/components/form/ValidationMessage";
+import { ValidationMessage } from '../../../../../../common/components/form/ValidationMessage';
 
 type OptionProps = UserType & { props: HTMLAttributes<HTMLLIElement> };
 const Option: React.FC<OptionProps> = ({ name, icon, props }) => (

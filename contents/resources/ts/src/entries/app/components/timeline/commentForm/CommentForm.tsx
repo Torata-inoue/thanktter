@@ -8,7 +8,7 @@ import { TextInput } from './textInput/TextInput';
 import { postCommentApi } from '../../../features/comment/post';
 import { handleApiError } from '../../../../../common/utils/api';
 import { ImageUploader } from './image/ImageUploader';
-import {Form} from "../../../../../common/components/form/Form";
+import { Form } from '../../../../../common/components/form/Form';
 
 export const CommentForm: React.FC = () => {
   const methods = useCommentForm();
