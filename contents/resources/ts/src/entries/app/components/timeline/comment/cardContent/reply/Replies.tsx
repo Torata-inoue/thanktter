@@ -4,7 +4,7 @@ import { Avatar, Divider, Link, List, ListItem, ListItemAvatar, ListItemText } f
 import { ReplyType } from '../../../../../constants/comment';
 
 type RepliesProps = { replies: ReplyType[] };
-export const Replies: React.FC<RepliesProps> = ({ replies }) => (
+const Component: React.FC<RepliesProps> = ({ replies }) => (
   <List>
     <Divider />
     {replies.map(({ user, text, replyId }) => (
@@ -27,3 +27,5 @@ export const Replies: React.FC<RepliesProps> = ({ replies }) => (
     ))}
   </List>
 );
+
+export const Replies = React.memo(Component);
