@@ -36,8 +36,8 @@ export const CommentCard: React.FC<CommentCardProps> = ({
       </CardActions>
       <Collapse in={openReply} timeout="auto">
         <CardContent>
-          <ReplyForm />
-          <Replies replies={replies} />
+          <ReplyForm commentId={id} />
+          {replies.length && <Replies replies={replies} />}
         </CardContent>
       </Collapse>
     </Card>

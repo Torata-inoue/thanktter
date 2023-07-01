@@ -50,7 +50,7 @@ const Component: React.FC<ReactionsBarProps> = ({ reactions }) => {
           }}
         >
           {(Object.keys(reactions) as Array<ReactionKeyType>).map((key) => (
-            <ProgressItem reactionKey={key} value={reactions[key]} />
+            <ProgressItem key={key} reactionKey={key} value={reactions[key]} />
           ))}
         </Box>
       </Grid>

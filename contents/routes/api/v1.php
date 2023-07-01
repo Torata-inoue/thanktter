@@ -14,6 +14,10 @@ $router->group(['prefix' => 'comment'], function (Router $router) {
     $router->post('/', [\App\Http\API\V1\Controllers\Comment\PostController::class, 'post']);
 });
 
+$router->group(['prefix' => 'reply'], function (Router $router) {
+    $router->post('/', [\App\Http\API\V1\Controllers\Reply\PostController::class, 'postReply']);
+});
+
 $router->group(['prefix' => 'reaction'], function (Router $router) {
     $router->post('/', [\App\Http\API\V1\Controllers\Reaction\PostController::class, 'postReaction']);
 });

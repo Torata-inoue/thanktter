@@ -8,8 +8,8 @@ const Component: React.FC<RepliesProps> = ({ replies }) => (
   <List>
     <Divider />
     {replies.map(({ user, text, replyId }) => (
-      <>
-        <ListItem key={replyId} alignItems="flex-start">
+      <React.Fragment key={replyId}>
+        <ListItem alignItems="flex-start">
           <ListItemAvatar>
             <Avatar alt={user.name} src={user.icon} />
           </ListItemAvatar>
@@ -23,7 +23,7 @@ const Component: React.FC<RepliesProps> = ({ replies }) => (
           />
         </ListItem>
         <Divider />
-      </>
+      </React.Fragment>
     ))}
   </List>
 );

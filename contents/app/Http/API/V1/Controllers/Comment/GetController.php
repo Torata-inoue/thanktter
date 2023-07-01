@@ -36,7 +36,7 @@ class GetController extends BaseController
             ],
             [
                 'id' => 9,
-                'text' => '今日頑張れ',
+                'text' => "今日は勝負の火種\n今日頑張れ",
                 'createdAt' => Carbon::now()->format('Y-m-d'),
                 'user' => ['id' => 5, 'name' => 'take', 'icon' => 'https://free-designer.net/design_img/0216053006.jpg'],
                 'nominees' => [
@@ -57,7 +57,7 @@ class GetController extends BaseController
                     ],
                     [
                         'user' => ['id' => 4, 'name' => 'yossi', 'icon' => 'https://free-designer.net/design_img/0216053006.jpg'],
-                        'text' => 'また今度お願いします！',
+                        'text' => "今回はありがとうございました。\nまた今度お願いします！",
                         'replyId' => 3
                     ]
                 ],
