@@ -7,7 +7,10 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
   plugins: [
     laravel({
-      input: ['resources/ts/src/entries/app/index.tsx'],
+      input: [
+        'resources/ts/src/entries/app/index.tsx',
+        'resources/ts/src/entries/login/index.tsx',
+      ],
       publicDirectory: 'htdocs',
       refresh: true,
     }),
