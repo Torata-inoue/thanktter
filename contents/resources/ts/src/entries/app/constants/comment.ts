@@ -4,6 +4,7 @@ import { ReactionKeyType } from './reactions';
 export type ReplyType = {
   user: UserType;
   text: string;
+  replyId: number;
 };
 
 export type CommentType = {

@@ -29,7 +29,8 @@ class GetController extends BaseController
                 'replies' => [
                     [
                         'user' => ['id' => 1, 'name' => 'tanaka', 'icon' => 'https://free-designer.net/design_img/1024043005.jpg'],
-                        'text' => 'どういたしまして'
+                        'text' => 'どういたしまして',
+                        'replyId' => 1
                     ]
                 ],
             ],
@@ -51,7 +52,13 @@ class GetController extends BaseController
                 'replies' => [
                     [
                         'user' => ['id' => 5, 'name' => 'take', 'icon' => 'https://free-designer.net/design_img/0216053006.jpg'],
-                        'text' => 'がんばりました！'
+                        'text' => 'がんばりました！',
+                        'replyId' => 2
+                    ],
+                    [
+                        'user' => ['id' => 4, 'name' => 'yossi', 'icon' => 'https://free-designer.net/design_img/0216053006.jpg'],
+                        'text' => 'また今度お願いします！',
+                        'replyId' => 3
                     ]
                 ],
             ]
