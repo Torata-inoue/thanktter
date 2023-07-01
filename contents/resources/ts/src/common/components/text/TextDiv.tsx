@@ -9,6 +9,7 @@ const Div = styled('div')<DivProps>(({ theme, textAlign }) => ({
   backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(1),
   textAlign,
+  whiteSpace: 'pre-wrap',
 }));
 
 type TextDivProps = {

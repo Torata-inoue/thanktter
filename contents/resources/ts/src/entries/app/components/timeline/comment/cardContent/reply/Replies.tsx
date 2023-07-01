@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Divider, Link, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { ReplyType } from '../../../../../constants/comment';
+import { TextDiv } from '../../../../../../../common/components/text/TextDiv';
 
 type RepliesProps = { replies: ReplyType[] };
 const Component: React.FC<RepliesProps> = ({ replies }) => (
@@ -19,7 +20,7 @@ const Component: React.FC<RepliesProps> = ({ replies }) => (
                 {user.name}
               </Link>
             }
-            secondary={text}
+            secondary={<TextDiv>{text}</TextDiv>}
           />
         </ListItem>
         <Divider />
