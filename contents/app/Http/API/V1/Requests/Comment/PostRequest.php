@@ -7,11 +7,11 @@ use App\Http\BaseRequest;
 class PostRequest extends BaseRequest
 {
     protected array $rules = [
-        'text' => 'string|max:1000',
-        'nomineeIds' => 'array|max:10',
-        'nomineeIds.*' => 'required|int|min:0',
-        'images' => 'array|max:4',
-        'images.*' => 'string',
+        'text' => ['required', 'string', 'max:1000'],
+        'nomineeIds' => ['required', 'array', 'max:10'],
+        'nomineeIds.*' => ['required', 'int', 'min:0'],
+        'images' => ['array', 'max:4'],
+        'images.*' => ['string'],
     ];
 
     protected array $formAttributes = [

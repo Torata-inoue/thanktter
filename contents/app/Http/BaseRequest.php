@@ -37,6 +37,9 @@ class BaseRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->request->has('data')) {
+            return ['data' => $this->rules];
+        }
         return $this->rules;
     }
 
@@ -66,5 +69,13 @@ class BaseRequest extends FormRequest
     protected function prepareValidate(Validator $validator): void
     {
         //
+    }
+
+    public function getValidData(): array
+    {
+        if ($this->request->has('data')) {
+            return $this->validated('data');
+        }
+        return $this->validated();
     }
 }

@@ -1,11 +1,19 @@
-import { atom, useRecoilValue } from 'recoil';
-import { AuthType, findAuthApi } from '../../features/auth/authApi';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useCallback } from 'react';
+import { findAuthApi } from '../../features/auth/authApi';
 import { globalRecoilKeys } from '../globalRecoilKeys';
+import { AuthType } from '../../constans/auth';
 
-const userState = atom<AuthType>({
+const authState = atom<AuthType>({
   key: globalRecoilKeys.USER,
   default: findAuthApi(),
 });
 
 type UseAuthType = () => AuthType;
-export const useAuth: UseAuthType = () => useRecoilValue(userState);
+export const useAuth: UseAuthType = () => useRecoilValue(authState);
+
+type UseSetAuthType = () => (auth: AuthType) => void;
+export const useSetAuth: UseSetAuthType = () => {
+  const setAuth = useSetRecoilState(authState);
+  return useCallback((auth) => setAuth(auth), [setAuth]);
+};

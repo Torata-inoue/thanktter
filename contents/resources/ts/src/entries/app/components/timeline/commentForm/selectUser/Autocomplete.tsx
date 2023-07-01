@@ -10,9 +10,9 @@ import {
   TextField,
 } from '@mui/material';
 import { Loadable } from '../../../../../../common/utils/loadable';
-import { UserType } from '../../../../features/user/get';
 import { CommentFormType } from '../../../../hooks/form/useCommentForm';
 import { ValidationMessage } from '../../../form/ValidationMessage';
+import { UserType } from '../../../../constants/user';
 
 type OptionProps = UserType & { props: HTMLAttributes<HTMLLIElement> };
 const Option: React.FC<OptionProps> = ({ name, icon, props }) => (

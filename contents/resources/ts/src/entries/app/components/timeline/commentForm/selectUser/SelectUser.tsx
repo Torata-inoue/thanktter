@@ -1,8 +1,9 @@
 import React, { Suspense, useMemo } from 'react';
 import { TextField } from '@mui/material';
 import { Loadable } from '../../../../../../common/utils/loadable';
-import { getUserListApi, UserType } from '../../../../features/user/get';
+import { getUserListApi } from '../../../../features/user/get';
 import { Autocomplete } from './Autocomplete';
+import { UserType } from '../../../../constants/user';
 
 const Fallback: React.FC = () => <TextField variant="outlined" placeholder="推薦ユーザーを選択" disabled fullWidth />;
 
