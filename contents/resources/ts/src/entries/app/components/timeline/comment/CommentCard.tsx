@@ -32,7 +32,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
         <ReactionsBar reactions={reactions} />
       </CardContent>
       <CardActions>
-        <ReplyUserIcons replies={replies} handleOnClick={handleReplyClick} />
+        <ReplyUserIcons replies={replies} handleOnClick={handleReplyClick} open={openReply} />
       </CardActions>
       <Collapse in={openReply} timeout="auto">
         <CardContent>
