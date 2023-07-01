@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Box, IconButton, SxProps, Theme, Tooltip } from '@mui/material';
+import { IconButton, SxProps, Theme, Tooltip } from '@mui/material';
 import { ReactionKeyType, reactions, reactionsObject } from '../../../../../constants/reactions';
 import { ReactionFormType } from '../../../../../hooks/form/useReactionForm';
 import { ReactionForm } from './ReactionForm';
