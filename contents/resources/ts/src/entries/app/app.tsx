@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { Timeline } from './pages/Timeline';
 import { Template } from '../../common/components/template/Template';
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
 const Routes: React.FC = () =>
   useRoutes([
@@ -14,6 +15,10 @@ const Routes: React.FC = () =>
     {
       path: '/login',
       element: <Login />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ]);
 
