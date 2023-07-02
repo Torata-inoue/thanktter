@@ -1,11 +1,11 @@
 import React from 'react';
+import { Box, Button, Link, TextField } from '@mui/material';
+import { Send } from '@mui/icons-material';
+import { Link as RouterLink } from 'react-router-dom';
 import { FormProvider, SubmitHandler } from 'react-hook-form';
 import { RegisterFormType, useRegisterForm } from '../../hooks/form/useRegisterForm';
 import { Form } from '../../../../common/components/form/Form';
-import { Box, Button, Link, TextField } from '@mui/material';
 import { TextDiv } from '../../../../common/components/text/TextDiv';
-import { Send } from '@mui/icons-material';
-import { Link as RouterLink } from 'react-router-dom';
 
 export const RegisterForm: React.FC = () => {
   const methods = useRegisterForm();
