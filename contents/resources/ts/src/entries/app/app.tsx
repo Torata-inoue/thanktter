@@ -2,8 +2,9 @@ import React from 'react';
 import { HashRouter, useRoutes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { Timeline } from './pages/Timeline';
-import { Exchange } from './pages/Exchange';
 import { Template } from '../../common/components/template/Template';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
 const Routes: React.FC = () =>
   useRoutes([
@@ -12,8 +13,12 @@ const Routes: React.FC = () =>
       element: <Timeline />,
     },
     {
-      path: 'exchange',
-      element: <Exchange />,
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ]);
 

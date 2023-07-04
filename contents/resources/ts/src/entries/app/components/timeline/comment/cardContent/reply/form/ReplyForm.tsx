@@ -3,11 +3,11 @@ import { Button, TextField } from '@mui/material';
 import { Send } from '@mui/icons-material';
 import { FormProvider, SubmitHandler } from 'react-hook-form';
 import { ReplyFormType, useReplyForm } from '../../../../../../hooks/form/useReplyForm';
-import { Form } from '../../../../../form/Form';
-import { ValidationMessage } from '../../../../../form/ValidationMessage';
 import { useSetComment } from '../../../../../../states/atoms/comment';
 import { postReplyApi } from '../../../../../../features/comment/post';
 import { handleApiError } from '../../../../../../../../common/utils/api';
+import { Form } from '../../../../../../../../common/components/form/Form';
+import { ValidationMessage } from '../../../../../../../../common/components/form/ValidationMessage';
 
 type ReplyFormProps = { commentId: number };
 const Component: React.FC<ReplyFormProps> = ({ commentId }) => {
@@ -22,7 +22,7 @@ const Component: React.FC<ReplyFormProps> = ({ commentId }) => {
 
   return (
     <FormProvider {...methods}>
-      <Form onSubmit={onSubmit}>
+      <Form<ReplyFormType> onSubmit={onSubmit}>
         <TextField fullWidth multiline placeholder="返信を入力" {...methods.register('text')} />
         <ValidationMessage<ReplyFormType> name="text" />
         <Button type="submit" variant="contained" endIcon={<Send />}>
