@@ -64,3 +64,8 @@ services:
 
   redis:
     image: redis:5
+    ports:
+      - target: 6379
+        published: ${REDIS_PUBLISHED_PORT:-6379}
+        protocol: tcp
+        mode: host
