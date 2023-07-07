@@ -6,6 +6,5 @@ parameters:
     - app
     - tests
   level: 6
-  checkMissingIterableValueType: false
   parallel:
     processTimeout: 300.0

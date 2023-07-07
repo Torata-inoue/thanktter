@@ -2,13 +2,14 @@
 
 namespace App\Http;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BaseRequest extends FormRequest
 {
     /**
-     * @var array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @var array<string, string[]>
      */
     protected array $rules = [];
 
@@ -25,7 +26,7 @@ class BaseRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    final public function authorize(): bool
     {
         return true;
     }
@@ -33,9 +34,9 @@ class BaseRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, string[]>|array<string, array<string, array<string>>>
      */
-    public function rules(): array
+    final public function rules(): array
     {
         if ($this->request->has('data')) {
             return ['data' => $this->rules];
@@ -46,7 +47,7 @@ class BaseRequest extends FormRequest
     /**
      * @return array<string, string>
      */
-    public function messages(): array
+    final public function messages(): array
     {
         return $this->messages;
     }
@@ -54,7 +55,7 @@ class BaseRequest extends FormRequest
     /**
      * @return array<string, string>
      */
-    public function attributes(): array
+    final public function attributes(): array
     {
         return $this->formAttributes;
     }
@@ -71,7 +72,10 @@ class BaseRequest extends FormRequest
         //
     }
 
-    public function getValidData(): array
+    /**
+     * @return array<string, array<string>|string>
+     */
+    final public function getValidData(): array
     {
         if ($this->request->has('data')) {
             return $this->validated('data');
