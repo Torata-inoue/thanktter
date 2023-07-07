@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, MenuItem } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { BorderColor, Celebration, EmojiEvents, History, Person } from '@mui/icons-material';
+import {BorderColor, Celebration, EmojiEvents, History, Logout, Person} from '@mui/icons-material';
 
 const pages = [
   { link: 'exchange', name: '景品交換', icon: <EmojiEvents /> },
@@ -12,15 +12,27 @@ const pages = [
 ];
 
 type LinksType = { handleMenuClose: () => void };
-export const Links: React.FC<LinksType> = ({ handleMenuClose }) => (
-  <>
-    {pages.map(({ link, name, icon }) => (
-      <MenuItem key={link} onClick={handleMenuClose}>
-        {icon}
-        <Link sx={{ ml: 2 }} underline="none" color="inherit" component={RouterLink} to={link}>
-          {name}
+export const Links: React.FC<LinksType> = ({ handleMenuClose }) => {
+  const handleLogout: React.MouseEventHandler<HTMLLIElement> = () => {
+
+  }
+
+  return (
+    <>
+      {pages.map(({ link, name, icon }) => (
+        <MenuItem key={link} onClick={handleMenuClose}>
+          {icon}
+          <Link sx={{ ml: 2 }} underline="none" color="inherit" component={RouterLink} to={link}>
+            {name}
+          </Link>
+        </MenuItem>
+      ))}
+      <MenuItem onClick={handleLogout}>
+        <Logout />
+        <Link sx={{ ml: 2 }} underline="none" color="inherit" component={RouterLink} to="/login">
+          ログアウト
         </Link>
       </MenuItem>
-    ))}
-  </>
-);
+    </>
+  )
+};
