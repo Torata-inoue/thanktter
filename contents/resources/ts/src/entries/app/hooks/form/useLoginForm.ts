@@ -1,12 +1,12 @@
 import { useForm, UseFormReturn } from 'react-hook-form';
 
-export type LoginFormType = { mailAddress: string; password: string };
+export type LoginFormType = { email: string; password: string };
 
 type UseLoginFormType = () => UseFormReturn<LoginFormType>;
 export const useLoginForm: UseLoginFormType = () => {
   const methods = useForm<LoginFormType>();
 
-  methods.register('mailAddress', {
+  methods.register('email', {
     required: 'メールアドレスを入力してください',
     maxLength: {
       value: 50,

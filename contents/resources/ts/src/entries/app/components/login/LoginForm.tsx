@@ -7,6 +7,8 @@ import { TextDiv } from '../../../../common/components/text/TextDiv';
 import { Form } from '../../../../common/components/form/Form';
 import { useSetAuth } from '../../../../common/states/atoms/auth';
 import { LoginFormType, useLoginForm } from '../../hooks/form/useLoginForm';
+import { postLoginApi } from '../../features/login/login';
+import { handleApiError } from '../../../../common/utils/api';
 
 export const LoginForm: React.FC = () => {
   const methods = useLoginForm();
@@ -14,15 +16,19 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
-    // postLoginApi(data)
-    navigate('/');
+    postLoginApi(data)
+      .then(({ user }) => {
+        setAuth(user);
+        navigate('/');
+      })
+      .catch(handleApiError);
   };
 
   return (
     <FormProvider {...methods}>
       <Form<LoginFormType> onSubmit={onSubmit}>
         <TextDiv>ログイン</TextDiv>
-        <TextField fullWidth placeholder="メールアドレス" {...methods.register('mailAddress')} />
+        <TextField fullWidth placeholder="メールアドレス" {...methods.register('email')} />
         <TextField fullWidth type="password" placeholder="パスワード" {...methods.register('password')} />
         <Box
           sx={{

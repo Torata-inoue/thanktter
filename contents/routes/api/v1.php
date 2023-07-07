@@ -3,7 +3,7 @@
 use Illuminate\Routing\Router;
 
 /** @var Router $router */
-
+$router->post('/login', \App\Http\API\V1\Controllers\Auth\LoginController::class);
 
 $router->group(['middleware' => 'auth:sanctum'], function (Router $router) {
     $router->get('auth', [\App\Http\API\V1\Controllers\Auth\GetAuthController::class, 'getAuth']);
