@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { HashRouter, RouteObject, useRoutes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { Timeline } from './pages/Timeline';
@@ -51,7 +51,9 @@ const Routes: React.FC = () => {
 export const App: React.FC = () => (
   <RecoilRoot>
     <HashRouter>
-      <Routes />
+      <Suspense>
+        <Routes />
+      </Suspense>
     </HashRouter>
   </RecoilRoot>
 );

@@ -16,7 +16,7 @@ export const Template: React.FC<TemplateProps> = ({ children }) => {
   }, [authenticated, navigate]);
 
   if (!authenticated) {
-    return null; // Or return some kind of "Loading" indicator.
+    return null;
   }
 
   return (
