@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, MenuItem } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import {BorderColor, Celebration, EmojiEvents, History, Logout, Person} from '@mui/icons-material';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { BorderColor, Celebration, EmojiEvents, History, Logout, Person } from '@mui/icons-material';
+import { postLogoutApi } from '../../../../entries/app/features/login/login';
+import { handleApiError } from '../../../utils/api';
 
 const pages = [
   { link: 'exchange', name: '景品交換', icon: <EmojiEvents /> },
@@ -13,9 +15,15 @@ const pages = [
 
 type LinksType = { handleMenuClose: () => void };
 export const Links: React.FC<LinksType> = ({ handleMenuClose }) => {
-  const handleLogout: React.MouseEventHandler<HTMLLIElement> = () => {
+  const navigate = useNavigate();
 
-  }
+  const handleLogout: React.MouseEventHandler<HTMLLIElement> = () => {
+    postLogoutApi()
+      .then(() => {
+        navigate('/login');
+      })
+      .catch(handleApiError);
+  };
 
   return (
     <>
@@ -29,10 +37,10 @@ export const Links: React.FC<LinksType> = ({ handleMenuClose }) => {
       ))}
       <MenuItem onClick={handleLogout}>
         <Logout />
-        <Link sx={{ ml: 2 }} underline="none" color="inherit" component={RouterLink} to="/login">
+        <Link sx={{ ml: 2 }} underline="none" color="inherit">
           ログアウト
         </Link>
       </MenuItem>
     </>
-  )
+  );
 };

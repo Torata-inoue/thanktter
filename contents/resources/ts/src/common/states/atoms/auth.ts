@@ -2,7 +2,7 @@ import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useCallback } from 'react';
 import { globalRecoilKeys } from '../globalRecoilKeys';
 import { AuthType } from '../../constans/auth';
-import {findAuthApi} from "../../features/auth/authApi";
+import { findAuthApi } from '../../features/auth/authApi';
 
 const authState = atom<AuthType | null>({
   key: globalRecoilKeys.USER,

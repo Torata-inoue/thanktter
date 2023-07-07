@@ -9,5 +9,4 @@ export const postLoginApi: PostLoginApi = (data) =>
   });
 
 type PostLogoutApiType = () => Promise<void>;
-export const postLogoutApi: PostLogoutApiType = () =>
-  api('/logout', 'POST')
+export const postLogoutApi: PostLogoutApiType = () => api('/logout', 'POST');

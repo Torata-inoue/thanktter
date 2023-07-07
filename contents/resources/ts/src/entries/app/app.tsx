@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 import { HashRouter, RouteObject, useRoutes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { Timeline } from './pages/Timeline';
