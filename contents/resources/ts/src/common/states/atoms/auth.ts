@@ -21,7 +21,7 @@ export const useAuth: UseAuthType = () => {
   return auth;
 };
 
-type UseSetAuthType = () => (auth: AuthType) => void;
+type UseSetAuthType = () => (auth: AuthType | null) => void;
 export const useSetAuth: UseSetAuthType = () => {
   const setAuth = useSetRecoilState(authState);
   return useCallback((auth) => setAuth(auth), [setAuth]);

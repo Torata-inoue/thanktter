@@ -4,6 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { BorderColor, Celebration, EmojiEvents, History, Logout, Person } from '@mui/icons-material';
 import { postLogoutApi } from '../../../../entries/app/features/login/login';
 import { handleApiError } from '../../../utils/api';
+import {useSetAuth} from "../../../states/atoms/auth";
 
 const pages = [
   { link: 'exchange', name: '景品交換', icon: <EmojiEvents /> },
@@ -16,10 +17,12 @@ const pages = [
 type LinksType = { handleMenuClose: () => void };
 export const Links: React.FC<LinksType> = ({ handleMenuClose }) => {
   const navigate = useNavigate();
+  const setAuth = useSetAuth();
 
   const handleLogout: React.MouseEventHandler<HTMLLIElement> = () => {
     postLogoutApi()
       .then(() => {
+        setAuth(null);
         navigate('/login');
       })
       .catch(handleApiError);
