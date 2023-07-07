@@ -1,18 +1,27 @@
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useCallback } from 'react';
-import { findAuthApi } from '../../features/auth/authApi';
 import { globalRecoilKeys } from '../globalRecoilKeys';
 import { AuthType } from '../../constans/auth';
+import { findAuthApi } from '../../features/auth/authApi';
 
-const authState = atom<AuthType>({
+const authState = atom<AuthType | null>({
   key: globalRecoilKeys.USER,
   default: findAuthApi(),
 });
 
-type UseAuthType = () => AuthType;
-export const useAuth: UseAuthType = () => useRecoilValue(authState);
+type UseAuthenticated = () => boolean;
+export const useAuthenticated: UseAuthenticated = () => Boolean(useRecoilValue(authState));
 
-type UseSetAuthType = () => (auth: AuthType) => void;
+type UseAuthType = () => AuthType;
+export const useAuth: UseAuthType = () => {
+  const auth = useRecoilValue(authState);
+  if (!auth) {
+    throw Error('ログインしてください');
+  }
+  return auth;
+};
+
+type UseSetAuthType = () => (auth: AuthType | null) => void;
 export const useSetAuth: UseSetAuthType = () => {
   const setAuth = useSetRecoilState(authState);
   return useCallback((auth) => setAuth(auth), [setAuth]);
