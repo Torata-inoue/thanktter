@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Cache\CacheObserver;
+use App\Domains\Cache\CacheObserver;
 use Carbon\Laravel\ServiceProvider;
 
 class CacheServiceProvider extends ServiceProvider

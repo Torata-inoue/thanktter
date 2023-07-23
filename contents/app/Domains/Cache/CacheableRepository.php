@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Repository\Cache;
+namespace App\Domains\Cache;
 
-use App\Models\Cache\CacheableModel;
-use App\Repository\Repository;
+use App\Domains\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Redis;
 
+/**
+ * @template TModel of CacheableModel
+ * @extends Repository<TModel>
+ */
 class CacheableRepository extends Repository
 {
     protected Redis $redis;
@@ -53,7 +56,7 @@ class CacheableRepository extends Repository
      * キャッシュ有効かつ、データが存在したらキャッシュから取得
      * そうでなければ DB から取得し、キャッシュ有効はキャッシュに登録する
      * @param int $id
-     * @return CacheableModel|null
+     * @return TModel|null
      * @throws \RedisException
      */
     public function findById(int $id): ?CacheableModel
@@ -108,7 +111,7 @@ class CacheableRepository extends Repository
     /**
      * キャッシュから ID 指定でレコード情報取得
      * @param int $id
-     * @return CacheableModel|null
+     * @return TModel|null
      * @throws \RedisException
      */
     protected function findByIdFromCache(int $id): ?CacheableModel
@@ -119,7 +122,7 @@ class CacheableRepository extends Repository
     /**
      * DB から ID 指定でレコード情報取得
      * @param int $id
-     * @return CacheableModel|null
+     * @return TModel|null
      */
     protected function findByIdFromDB(int $id): ?CacheableModel
     {

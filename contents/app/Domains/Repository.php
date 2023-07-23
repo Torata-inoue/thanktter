@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Repository;
+namespace App\Domains;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @template T of Model
+ */
 abstract class Repository
 {
+    /**
+     * @param Model $model
+     */
     public function __construct(protected Model $model)
     {
-        $this->model = new $model;
     }
 
     /**
-     * @return Builder<Model>
+     * @return Builder<T>
      */
     protected function getQueryBuilder(): Builder
     {

@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Models\Cache;
-
-use App\Repository\Cache\CacheableRepository;
+namespace App\Domains\Cache;
 
 class CacheObserver
 {

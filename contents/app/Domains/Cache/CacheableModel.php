@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Cache;
+namespace App\Domains\Cache;
 
 use Illuminate\Database\Eloquent\Model;
 
