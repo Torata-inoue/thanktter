@@ -3,23 +3,18 @@
 namespace App\Domains\Cache;
 
 use App\Domains\Repository;
-use Illuminate\Database\Eloquent\Model;
 use Redis;
 
 /**
  * @template TModel of CacheableModel
  * @extends Repository<TModel>
+ * @property TModel $model
  */
 class CacheableRepository extends Repository
 {
     protected Redis $redis;
 
     protected bool $useCache = true;
-
-    /**
-     * @var TModel $model
-     */
-    protected Model $model;
 
     /**
      * Cacheable constructor.
@@ -126,11 +121,8 @@ class CacheableRepository extends Repository
      */
     protected function findByIdFromDB(int $id): ?CacheableModel
     {
-        /** @var CacheableModel|null $result */
-        $result = $this->getQueryBuilder()
+        return $this->getQueryBuilder()
             ->where($this->model->getKeyName(), '=', $id)
             ->first();
-
-        return $result;
     }
 }
