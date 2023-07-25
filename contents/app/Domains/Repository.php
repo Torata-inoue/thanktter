@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Repository
 {
     /**
-     * @param Model $model
+     * @param T $model
      */
     public function __construct(protected Model $model)
     {

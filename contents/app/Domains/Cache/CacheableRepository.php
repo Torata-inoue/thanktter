@@ -17,13 +17,13 @@ class CacheableRepository extends Repository
     protected bool $useCache = true;
 
     /**
-     * @var CacheableModel
+     * @var TModel $model
      */
     protected Model $model;
 
     /**
      * Cacheable constructor.
-     * @param CacheableModel $model
+     * @param TModel $model
      */
     public function __construct(CacheableModel $model)
     {
@@ -88,7 +88,7 @@ class CacheableRepository extends Repository
 
     /**
      * キャッシュ登録
-     * @param CacheableModel $model
+     * @param TModel $model
      * @throws \RedisException
      */
     public function setDbCache(CacheableModel $model): void
