@@ -40,7 +40,14 @@ RUN apt-get update \
 RUN apt-get -y update
 RUN apt-get install -y \
     curl \
-    gnupg
+    gnupg \
+    imagemagick \
+    libmagickwand-dev \
+    libmagickcore-dev
+
+RUN pecl install redis imagick \
+  && docker-php-ext-enable redis imagick
+
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install npm@9 -g
