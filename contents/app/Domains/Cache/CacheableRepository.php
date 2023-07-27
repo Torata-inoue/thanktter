@@ -52,7 +52,6 @@ class CacheableRepository extends Repository
      * そうでなければ DB から取得し、キャッシュ有効はキャッシュに登録する
      * @param int $id
      * @return TModel|null
-     * @throws \RedisException
      */
     public function findById(int $id): ?CacheableModel
     {
@@ -84,7 +83,6 @@ class CacheableRepository extends Repository
     /**
      * キャッシュ登録
      * @param TModel $model
-     * @throws \RedisException
      */
     public function setDbCache(CacheableModel $model): void
     {
@@ -94,12 +92,16 @@ class CacheableRepository extends Repository
         $expire = $this->model->getDbCacheExpire();
         $serialize_data = serialize($model);
 
-        if ($expire > 0) {
-            // 有効期限あり
-            $this->redis->setex($key, $expire, $serialize_data);
-        } else {
-            // 有効期限なし
-            $this->redis->set($key, $serialize_data);
+        try {
+            if ($expire > 0) {
+                // 有効期限あり
+                $this->redis->setex($key, $expire, $serialize_data);
+            } else {
+                // 有効期限なし
+                $this->redis->set($key, $serialize_data);
+            }
+        } catch (\RedisException $e) {
+            //
         }
     }
 
@@ -107,11 +109,14 @@ class CacheableRepository extends Repository
      * キャッシュから ID 指定でレコード情報取得
      * @param int $id
      * @return TModel|null
-     * @throws \RedisException
      */
     protected function findByIdFromCache(int $id): ?CacheableModel
     {
-        return unserialize($this->redis->get($this->getDbCacheKey($id))) ?: null;
+        try {
+            return unserialize($this->redis->get($this->getDbCacheKey($id))) ?: null;
+        } catch (\RedisException $e) {
+            return null;
+        }
     }
 
     /**
