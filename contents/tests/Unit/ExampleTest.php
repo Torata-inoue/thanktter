@@ -20,11 +20,7 @@ class ExampleTest extends TestCase
 
     public function testConnectDb(): void
     {
-        $user = new User([
-            'name' => 'name',
-            'email' => 'email',
-            'password' => 'password'
-        ]);
-        $this->assertTrue($user->save());
+        $user = User::factory()->create();
+        $this->assertTrue($user->exists);
     }
 }
