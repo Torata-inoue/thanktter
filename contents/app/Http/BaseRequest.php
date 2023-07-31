@@ -2,9 +2,8 @@
 
 namespace App\Http;
 
-use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class BaseRequest extends FormRequest
 {
@@ -38,9 +37,6 @@ class BaseRequest extends FormRequest
      */
     final public function rules(): array
     {
-        if ($this->request->has('data')) {
-            return ['data' => $this->rules];
-        }
         return $this->rules;
     }
 
@@ -62,24 +58,20 @@ class BaseRequest extends FormRequest
 
     final protected function prepareForValidation(): void
     {
+        /** @var Validator $validator */
         $validator = $this->getValidatorInstance();
         parent::prepareForValidation();
+
+        // axiosはdataのキーでリクエストが渡されるため
+        if (isset($validator->getData()['data'])) {
+            $validator->setData($validator->getData()['data']);
+        }
+
         $this->prepareValidate($validator);
     }
 
     protected function prepareValidate(Validator $validator): void
     {
         //
-    }
-
-    /**
-     * @return array<string, array<string>|string>
-     */
-    final public function getValidData(): array
-    {
-        if ($this->request->has('data')) {
-            return $this->validated('data');
-        }
-        return $this->validated();
     }
 }

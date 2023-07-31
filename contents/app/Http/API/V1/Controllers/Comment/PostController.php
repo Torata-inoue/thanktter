@@ -10,7 +10,7 @@ class PostController extends BaseController
 {
     public function post(PostRequest $request): JsonResponse
     {
-        $request->input();
+        $data = $request->safe(['text', 'nomineeIds', 'images']);
 
         return new JsonResponse([]);
     }

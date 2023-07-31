@@ -11,7 +11,7 @@ class PostRequest extends BaseRequest
         'nomineeIds' => ['required', 'array', 'max:10'],
         'nomineeIds.*' => ['required', 'int', 'min:0'],
         'images' => ['array', 'max:4'],
-        'images.*' => ['string'],
+//        'images.*' => ['string'],
     ];
 
     protected array $formAttributes = [
