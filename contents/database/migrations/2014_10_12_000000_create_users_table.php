@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('chatwork_id')->nullable();
             $table->tinyInteger('permission')->default(User::PERMISSION_USER);
             $table->tinyInteger('status')->default(User::STATUS_EXIST);
-            $table->integer('stamina')->default(config('stamina.max'));
+            $table->integer('stamina')->default(config('common.user.stamina.max'));
             $table->date('last_login');
             $table->unsignedTinyInteger('rank')->default(1);
             $table->rememberToken();
