@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\User;
+namespace Database\Factories\Domains\User;
 
 use App\Domains\User\User;
 use Carbon\Carbon;

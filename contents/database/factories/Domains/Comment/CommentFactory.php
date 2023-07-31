@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Comment;
+namespace Database\Factories\Domains\Comment;
 
 use App\Domains\Comment\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;

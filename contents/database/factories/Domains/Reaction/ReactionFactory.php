@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Reaction;
+namespace Database\Factories\Domains\Reaction;
 
 use App\Domains\Reaction\Reaction;
 use Illuminate\Database\Eloquent\Factories\Factory;

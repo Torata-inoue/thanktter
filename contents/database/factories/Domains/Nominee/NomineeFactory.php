@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Nominee;
+namespace Database\Factories\Domains\Nominee;
 
 use App\Domains\Nominee\Nominee;
 use Illuminate\Database\Eloquent\Factories\Factory;
