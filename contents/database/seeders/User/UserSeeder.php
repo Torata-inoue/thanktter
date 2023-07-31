@@ -2,29 +2,22 @@
 
 namespace Database\Seeders\User;
 
+use App\Domains\User\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        \DB::table('users')->insert([
-            [
-                'name'              => 'admin',
-                'email'             => 'admin@example.com',
-                'email_verified_at' => now(),
-                'password'          => \Hash::make('password1234'),
-                'created_at'        => now(),
-                'updated_at'        => now(),
-            ],
-            [
-                'name'              => 'pikimaru',
-                'email'             => 'pikimaru@example.com',
-                'email_verified_at' => now(),
-                'password'          => \Hash::make('password1234'),
-                'created_at'        => now(),
-                'updated_at'        => now(),
-            ],
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => \Hash::make('password1234')
+        ]);
+        User::factory()->create([
+            'name'              => 'pikimaru',
+            'email'             => 'pikimaru@example.com',
+            'password'          => \Hash::make('password1234'),
         ]);
     }
 }
