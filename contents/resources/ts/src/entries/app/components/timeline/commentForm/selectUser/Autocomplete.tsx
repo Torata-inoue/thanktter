@@ -15,9 +15,9 @@ import { UserType } from '../../../../constants/user';
 import { ValidationMessage } from '../../../../../../common/components/form/ValidationMessage';
 
 type OptionProps = UserType & { props: HTMLAttributes<HTMLLIElement> };
-const Option: React.FC<OptionProps> = ({ name, icon, props }) => (
+const Option: React.FC<OptionProps> = ({ name, icon_path, props }) => (
   <Box component="li" {...props}>
-    <Avatar alt={name} src={icon} />
+    <Avatar alt={name} src={icon_path} />
     {name}
   </Box>
 );
@@ -30,9 +30,9 @@ const Input: React.FC<InputProps> = ({ params }) => (
 type TagsProps = { value: UserType[]; getTagProps: AutocompleteGetTagProps };
 const Tags: React.FC<TagsProps> = ({ value, getTagProps }) => (
   <>
-    {value.map(({ icon, name }, index) => (
+    {value.map(({ icon_path, name }, index) => (
       <Chip
-        avatar={<Avatar src={icon} alt={name} />}
+        avatar={<Avatar src={icon_path} alt={name} />}
         variant="outlined"
         label={name}
         size="small"

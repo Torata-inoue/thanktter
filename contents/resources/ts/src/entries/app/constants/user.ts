@@ -1,1 +1,1 @@
-export type UserType = { id: number; name: string; icon: string };
+export type UserType = { id: number; name: string; icon_path: string };
