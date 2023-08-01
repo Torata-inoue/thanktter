@@ -63,7 +63,7 @@ jobs:
       - name: larastan (PHPStan)
         run: composer run phpstan
       - name: PHP CodeSniffer
-        run: composer run phpcs
+        run: ./vendor/bin/phpcs --standard=phpcs.xml -n
 
   REACT:
     runs-on: ubuntu-20.04
