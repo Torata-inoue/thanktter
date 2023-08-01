@@ -26,8 +26,7 @@ class LoginController extends BaseController
         if ($this->auth->guard()->attempt($data)) {
             $request->session()->regenerate();
 
-            $data = ['user' => $this->auth->user()];
-            return new JsonResponse(compact('data'));
+            return new JsonResponse(['user' => $this->auth->user()]);
         }
 
         throw new AuthenticationException();
