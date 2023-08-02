@@ -9,8 +9,8 @@ export const ReplyUserIcons: React.FC<ReplyUserIconsProps> = ({ replies, handleO
   <IconButton onClick={handleOnClick}>
     <Chat color="disabled" />
     <AvatarGroup max={5}>
-      {replies.map(({ user: { icon, name, id } }) => (
-        <Avatar key={id} alt={name} src={icon} sx={{ width: 28, height: 28 }} />
+      {replies.map(({ user: { icon_path, name, id } }) => (
+        <Avatar key={id} alt={name} src={icon_path} sx={{ width: 28, height: 28 }} />
       ))}
     </AvatarGroup>
     <TextDiv>{open ? '閉じる' : '返信をみる'}</TextDiv>

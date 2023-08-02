@@ -9,7 +9,7 @@ $router->get('auth', [\App\Http\API\V1\Controllers\Auth\GetAuthController::class
 
 $router->group(['middleware' => 'auth:sanctum'], function (Router $router) {
     $router->group(['prefix' => 'user'], function (Router $router) {
-        $router->get('list', [\App\Http\API\V1\Controllers\User\List\GetUserListBaseController::class, 'getUserList']);
+        $router->get('list', [\App\Http\API\V1\Controllers\User\List\GetUserListController::class, 'getUserList']);
     });
 
     $router->group(['prefix' => 'comment'], function (Router $router) {

@@ -9,6 +9,7 @@ class JsonResponse extends BaseJsonResponse
 {
     public function __construct($data = null)
     {
+        $data['data'] = $data;
         $data['code'] = Response::HTTP_OK;
         $data['errors'] = [];
 

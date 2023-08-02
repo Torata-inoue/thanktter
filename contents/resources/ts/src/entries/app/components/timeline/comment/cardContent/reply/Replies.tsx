@@ -11,7 +11,7 @@ const Component: React.FC<RepliesProps> = ({ replies }) => (
       <React.Fragment key={replyId}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt={user.name} src={user.icon} />
+            <Avatar alt={user.name} src={user.icon_path} />
           </ListItemAvatar>
           <ListItemText
             primary={

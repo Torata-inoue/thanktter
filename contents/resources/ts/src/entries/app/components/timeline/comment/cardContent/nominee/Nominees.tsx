@@ -22,7 +22,7 @@ const BadgeContent: React.FC = () => (
 );
 
 type NomineeProps = { user: UserType; commentId: number };
-const Nominee: React.FC<NomineeProps> = ({ user: { id, name, icon }, commentId }) => {
+const Nominee: React.FC<NomineeProps> = ({ user: { id, name, icon_path }, commentId }) => {
   const { setValue } = useFormContext<ReactionFormType>();
 
   const handleOnClick: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -38,7 +38,7 @@ const Nominee: React.FC<NomineeProps> = ({ user: { id, name, icon }, commentId }
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             badgeContent={<BadgeContent />}
           >
-            <Avatar src={icon} alt={name} />
+            <Avatar src={icon_path} alt={name} />
           </Badge>
         </IconButton>
       </ReactionTooltip>
