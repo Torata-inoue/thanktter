@@ -4,7 +4,9 @@ namespace App\Library\ReactResponse\Comment;
 
 use App\Domains\Comment\Comment;
 use App\Domains\Nominee\Nominee;
+use App\Domains\Reaction\ReactionType;
 use App\Library\ReactResponse\BaseResponse;
+use App\Library\ReactResponse\Reaction\ReactionResponse;
 use App\Library\ReactResponse\User\UserResponse;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,7 +15,7 @@ readonly class CommentResponse extends BaseResponse
     /**
      * @param Comment $comment
      * @param Collection<int, Nominee> $nominees
-     * @param array<int, int> $reactions
+     * @param array{type: int, count: int}[] $reactions
      */
     public function __construct(
         private Comment    $comment,
@@ -31,7 +33,7 @@ readonly class CommentResponse extends BaseResponse
      *     createdAt: string,
      *     user: UserResponse,
      *     nominees: UserResponse[],
-     *     reactions: array<int, int>,
+     *     reactions: ReactionResponse,
      *     replies: ReplyResponse[]
      * }
      */
@@ -46,7 +48,7 @@ readonly class CommentResponse extends BaseResponse
                 assert(isset($nominee->user));
                 return new UserResponse($nominee->user);
             })->all(),
-            'reactions' => $this->reactions,
+            'reactions' => new ReactionResponse($this->reactions),
             'replies' => $this->comment->replies->map(fn(Comment $comment) => new ReplyResponse($comment))->all()
         ];
     }
