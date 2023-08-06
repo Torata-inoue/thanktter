@@ -4,6 +4,7 @@ namespace App\Domains\Comment;
 
 use App\Domains\Cache\CacheableModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int $id
@@ -17,6 +18,8 @@ use Carbon\Carbon;
  */
 class Comment extends CacheableModel
 {
+    use HasFactory;
+
     const STATUS_DELETED = 0; //削除コメント
     const STATUS_EXIST   = 1; //存在するコメント
 
