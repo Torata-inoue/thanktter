@@ -3,9 +3,10 @@
 namespace App\Domains\Nominee;
 
 use App\Domains\Repository;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @extends Repository<Nominee>
+ * @extends Repository<Nominee, Builder<Nominee>>
  */
 class NomineeRepository extends Repository
 {

@@ -46,6 +46,15 @@ class Comment extends CacheableModel
     ];
 
     /**
+     * @param $query
+     * @return CommentBuilder
+     */
+    public function newEloquentBuilder($query): CommentBuilder
+    {
+        return new CommentBuilder($query);
+    }
+
+    /**
      * @return BelongsTo<User, Comment>
      */
     public function belongsToUser(): BelongsTo

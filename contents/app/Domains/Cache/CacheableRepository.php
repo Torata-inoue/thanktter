@@ -3,11 +3,13 @@
 namespace App\Domains\Cache;
 
 use App\Domains\Repository;
+use Illuminate\Database\Eloquent\Builder;
 use Redis;
 
 /**
  * @template TModel of CacheableModel
- * @extends Repository<TModel>
+ * @template TBuilder of Builder<TModel>
+ * @extends Repository<TModel, TBuilder>
  * @property TModel $model
  */
 class CacheableRepository extends Repository

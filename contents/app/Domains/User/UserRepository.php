@@ -3,10 +3,11 @@
 namespace App\Domains\User;
 
 use App\Domains\Cache\CacheableRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * @extends CacheableRepository<User>
+ * @extends CacheableRepository<User, Builder<User>>
  */
 class UserRepository extends CacheableRepository
 {

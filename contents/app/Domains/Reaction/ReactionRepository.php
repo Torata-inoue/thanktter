@@ -3,9 +3,10 @@
 namespace App\Domains\Reaction;
 
 use App\Domains\Repository;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @extends Repository<Reaction>
+ * @extends Repository<Reaction, Builder<Reaction>>
  */
 class ReactionRepository extends Repository
 {
