@@ -4,6 +4,7 @@ namespace App\Service\User;
 
 use App\Domains\User\User;
 use App\Domains\User\UserRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 readonly class ListService
 {
@@ -12,12 +13,10 @@ readonly class ListService
     }
 
     /**
-     * @return array{id: int, name: string, icon_path: string}[]
+     * @return Collection<int, User>
      */
-    public function getUserList(): array
+    public function getUserList(): Collection
     {
-        return $this->userRepository->getUsersByStatus()
-            ->map(fn(User $user) => $user->only(['id', 'name', 'icon_path']))
-            ->all();
+        return $this->userRepository->getUsersByStatus();
     }
 }

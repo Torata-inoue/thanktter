@@ -22,9 +22,7 @@ class ListServiceTest extends TestCase
         $actual = $this->listService->getUserList();
         $expected = User::query()
             ->where('status', '=', User::STATUS_EXIST)
-            ->get()
-            ->map(fn(User $user) => $user->only(['id', 'name', 'icon_path']))
-            ->all();
+            ->get();
 
         $this->assertEquals($expected, $actual);
     }

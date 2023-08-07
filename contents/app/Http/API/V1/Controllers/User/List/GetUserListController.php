@@ -2,6 +2,7 @@
 
 namespace App\Http\API\V1\Controllers\User\List;
 
+use App\Http\API\V1\Resources\User\UserResource;
 use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 use App\Service\User\ListService;
@@ -10,6 +11,8 @@ class GetUserListController extends BaseController
 {
     public function getUserList(ListService $service): JsonResponse
     {
-        return new JsonResponse($service->getUserList());
+        $userList = $service->getUserList();
+
+        return new JsonResponse(UserResource::collection($userList));
     }
 }
