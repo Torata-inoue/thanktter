@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @template TResource
  */
-class BaseResource extends JsonResource
+abstract class BaseResource extends JsonResource
 {
     public static $wrap = null;
 
