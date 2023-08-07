@@ -58,7 +58,7 @@ class Comment extends CacheableModel
      */
     public function user(): Attribute
     {
-        if ($this->relationLoaded('belongsToUser')) {
+        if (!$this->relationLoaded('belongsToUser')) {
             throw new RelationNotFoundException();
         }
 
@@ -80,7 +80,7 @@ class Comment extends CacheableModel
      */
     public function replies(): Attribute
     {
-        if ($this->relationLoaded('hasManyReplies')) {
+        if (!$this->relationLoaded('hasManyReplies')) {
             throw new RelationNotFoundException();
         }
 
@@ -102,7 +102,7 @@ class Comment extends CacheableModel
      */
     public function nominees(): Attribute
     {
-        if ($this->relationLoaded('belongsToManyNominees')) {
+        if (!$this->relationLoaded('belongsToManyNominees')) {
             throw new RelationNotFoundException();
         }
 
