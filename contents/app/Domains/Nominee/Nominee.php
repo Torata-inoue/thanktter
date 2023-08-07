@@ -2,6 +2,7 @@
 
 namespace App\Domains\Nominee;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Nominee extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
+
     /**
      * @var array<int, string>
      */

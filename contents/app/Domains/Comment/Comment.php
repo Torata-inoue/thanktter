@@ -3,7 +3,15 @@
 namespace App\Domains\Comment;
 
 use App\Domains\Cache\CacheableModel;
+use App\Domains\User\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\RelationNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -12,11 +20,16 @@ use Carbon\Carbon;
  * @property int $string
  * @property int $type
  * @property int $reply_to
+ * @property User $user
+ * @property Collection<int, Comment> $replies
+ * @property Collection<int, User> $nominees
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
 class Comment extends CacheableModel
 {
+    use HasFactory;
+
     const STATUS_DELETED = 0; //削除コメント
     const STATUS_EXIST   = 1; //存在するコメント
 
@@ -31,4 +44,79 @@ class Comment extends CacheableModel
     protected $guarded = [
         'id'
     ];
+
+    /**
+     * @param $query
+     * @return CommentBuilder
+     */
+    public function newEloquentBuilder($query): CommentBuilder
+    {
+        return new CommentBuilder($query);
+    }
+
+    /**
+     * @return BelongsTo<User, Comment>
+     */
+    public function belongsToUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return Attribute<User, void>
+     */
+    public function user(): Attribute
+    {
+        if (!$this->relationLoaded('belongsToUser')) {
+            throw new RelationNotFoundException();
+        }
+
+        return Attribute::make(
+            get: fn() => $this->belongsToUser
+        );
+    }
+
+    /**
+     * @return HasMany<Comment>
+     */
+    public function hasManyReplies(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'reply_to');
+    }
+
+    /**
+     * @return Attribute<Collection<int, Comment>, void>
+     */
+    public function replies(): Attribute
+    {
+        if (!$this->relationLoaded('hasManyReplies')) {
+            throw new RelationNotFoundException();
+        }
+
+        return Attribute::make(
+            get: fn() => $this->hasManyReplies
+        );
+    }
+
+    /**
+     * @return BelongsToMany<User>
+     */
+    public function belongsToManyNominees(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'nominees', 'comment_id', 'user_id');
+    }
+
+    /**
+     * @return Attribute<Collection<int, User>, void>
+     */
+    public function nominees(): Attribute
+    {
+        if (!$this->relationLoaded('belongsToManyNominees')) {
+            throw new RelationNotFoundException();
+        }
+
+        return Attribute::make(
+            get: fn() => $this->belongsToManyNominees
+        );
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @template T of Model
+ * @template TBuilder of Builder<T>
  */
 abstract class Repository
 {
@@ -18,7 +19,7 @@ abstract class Repository
     }
 
     /**
-     * @return Builder<T>
+     * @return TBuilder
      */
     protected function getQueryBuilder(): Builder
     {

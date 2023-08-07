@@ -5,7 +5,7 @@ namespace App\Domains\Comment;
 use App\Domains\Cache\CacheableRepository;
 
 /**
- * @extends CacheableRepository<Comment>
+ * @extends CacheableRepository<Comment, CommentBuilder>
  */
 class CommentRepository extends CacheableRepository
 {
