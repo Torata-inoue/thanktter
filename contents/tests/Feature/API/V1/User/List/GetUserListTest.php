@@ -4,21 +4,23 @@ namespace API\V1\User\List;
 
 use App\Domains\User\User;
 use App\Library\Http\Response\JsonResponse;
-use Laravel\Sanctum\Sanctum;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GetUserListTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function setUp(): void
     {
         parent::setUp();
-        Sanctum::actingAs(User::factory()->create(), ['*']);
+        $this->actingAsSanctum();
     }
 
     public function testGetUserList(): void
     {
         User::factory(10)->create();
-        $response = $this->get('/api/v1/user/list');
+        $response = $this->get(parent::V1_ENDPOINT . '/user/list');
 
         $expected = User::query()
             ->where('status', '=', User::STATUS_EXIST)
