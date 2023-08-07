@@ -3,28 +3,20 @@
 namespace App\Http\API\V1\Resources\Comment;
 
 use App\Domains\Comment\Comment;
-use App\Domains\User\User;
 use App\Http\API\V1\Resources\BaseResource;
 use App\Http\API\V1\Resources\Reaction\ReactionResource;
 use App\Http\API\V1\Resources\User\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * @extends BaseResource<Comment>
+ * @extends BaseResource<array{
+ *     comment: Comment,
+ *     reactions: array<array{type: int, count: int}>
+ *     }>
  */
 class CommentResource extends BaseResource
 {
-    /**
-     * @param Comment $comment
-     * @param array<array{type: int, count: int}> $reactions
-     */
-    public function __construct(
-        Comment $comment,
-        private readonly array $reactions,
-    ) {
-        parent::__construct($comment);
-    }
-
     /**
      * @param Request $request
      * @return array{
@@ -32,21 +24,25 @@ class CommentResource extends BaseResource
      *     text: string,
      *     createdAt: string,
      *     user: UserResource,
-     *     nominees: UserResource[],
+     *     nominees: ResourceCollection<UserResource>,
      *     reactions: ReactionResource,
-     *     replies: ReplyResource[]
+     *     replies: ResourceCollection<ReplyResource>
      * }
      */
     public function toArray(Request $request): array
     {
+        /** @var Comment $comment */
+        $comment = $this->resource['comment'];
+        /** @var array<array{type: int, count: int}> $reactions */
+        $reactions = $this->resource['reactions'];
         return [
-            'id' => $this->resource->id,
-            'text' => $this->resource->text,
-            'createdAt' => $this->resource->created_at->format('Y-m-d H:i:s'),
-            'user' => new UserResource($this->resource->user),
-            'nominees' => $this->resource->nominees->map(fn(User $user) => new UserResource($user))->all(),
-            'reactions' => new ReactionResource($this->reactions),
-            'replies' => $this->resource->replies->map(fn(Comment $comment) => new ReplyResource($comment))->all()
+            'id' => $comment->id,
+            'text' => $comment->text,
+            'createdAt' => $comment->created_at->format('Y-m-d H:i:s'),
+            'user' => new UserResource($comment->user),
+            'nominees' => UserResource::collection($comment->nominees),
+            'reactions' => new ReactionResource($reactions),
+            'replies' => ReplyResource::collection($comment->replies)
         ];
     }
 }

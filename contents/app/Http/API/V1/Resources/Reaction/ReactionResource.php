@@ -17,9 +17,9 @@ class ReactionResource extends BaseResource
     public function toArray(Request $request): array
     {
         $reactions = [];
-        foreach ($this->resource as $reaction) {
-            $text = ReactionType::from($reaction['type'])->getText();
-            $reactions[$text] = $reaction['count'];
+        foreach ($this->resource as ['type' => $type, 'count' => $count]) {
+            $text = ReactionType::from($type)->getText();
+            $reactions[$text] = $count;
         }
         return $reactions;
     }
