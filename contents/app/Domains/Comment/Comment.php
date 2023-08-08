@@ -45,6 +45,11 @@ class Comment extends CacheableModel
         'id'
     ];
 
+    protected $visible = [
+        'id', 'user_id', 'text', 'status', 'type', 'reply_to', 'created_at', 'updated_at',
+        'user', 'replies', 'nominees'
+    ];
+
     /**
      * @param $query
      * @return CommentBuilder
@@ -67,12 +72,14 @@ class Comment extends CacheableModel
      */
     public function user(): Attribute
     {
-        if (!$this->relationLoaded('belongsToUser')) {
-            throw new RelationNotFoundException();
-        }
-
         return Attribute::make(
-            get: fn() => $this->belongsToUser
+            get: function () {
+                if (!$this->relationLoaded('belongsToUser')) {
+                    throw new RelationNotFoundException();
+                }
+                return $this->belongsToUser;
+            },
+            set: fn (User $user) => $this->setRelation('belongsToUser', $user)
         );
     }
 
@@ -89,12 +96,14 @@ class Comment extends CacheableModel
      */
     public function replies(): Attribute
     {
-        if (!$this->relationLoaded('hasManyReplies')) {
-            throw new RelationNotFoundException();
-        }
-
         return Attribute::make(
-            get: fn() => $this->hasManyReplies
+            get: function () {
+                if (!$this->relationLoaded('hasManyReplies')) {
+                    throw new RelationNotFoundException();
+                }
+                return $this->hasManyReplies;
+            },
+            set: fn (Collection $replies) => $this->setRelation('hasManyReplies', $replies)
         );
     }
 
@@ -111,12 +120,14 @@ class Comment extends CacheableModel
      */
     public function nominees(): Attribute
     {
-        if (!$this->relationLoaded('belongsToManyNominees')) {
-            throw new RelationNotFoundException();
-        }
-
         return Attribute::make(
-            get: fn() => $this->belongsToManyNominees
+            get: function () {
+                if (!$this->relationLoaded('belongsToManyNominees')) {
+                    throw new RelationNotFoundException();
+                }
+                return $this->belongsToManyNominees;
+            },
+            set: fn (Collection $nominees) => $this->setRelation('belongsToManyNominees', $nominees)
         );
     }
 }

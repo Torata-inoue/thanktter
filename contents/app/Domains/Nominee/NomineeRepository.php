@@ -14,4 +14,9 @@ class NomineeRepository extends Repository
     {
         parent::__construct($nominee);
     }
+
+    public function save(Nominee $nominee): bool
+    {
+        return $nominee->save();
+    }
 }

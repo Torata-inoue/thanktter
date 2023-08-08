@@ -6,10 +6,13 @@ use App\Domains\Comment\Comment;
 use App\Domains\User\User;
 use App\Http\API\V1\Resources\Comment\ReplyResource;
 use App\Http\API\V1\Resources\User\UserResource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReplyResourceTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testResource()
     {
 

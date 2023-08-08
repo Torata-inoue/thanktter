@@ -4,10 +4,13 @@ namespace Http\API\V1\Resource\User;
 
 use App\Domains\User\User;
 use App\Http\API\V1\Resources\User\UserResource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserResourceTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testResource()
     {
         $user = User::factory()->create();

@@ -13,4 +13,9 @@ class CommentRepository extends CacheableRepository
     {
         parent::__construct($comment);
     }
+
+    public function save(Comment $comment): bool
+    {
+        return $comment->save();
+    }
 }

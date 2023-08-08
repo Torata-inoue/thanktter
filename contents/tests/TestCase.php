@@ -18,6 +18,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function actingAsSanctum(array $abilities = ['*']): void
     {
-        Sanctum::actingAs(User::factory()->create(), $abilities);
+        $user = User::factory()->create();
+        Sanctum::actingAs($user, $abilities);
+        $this->app->instance(User::class, $user);
     }
 }
