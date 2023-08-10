@@ -2,7 +2,7 @@
 
 namespace App\Http\API\V1\Controllers\Comment;
 
-use App\Http\BaseController;
+use App\Http\API\V1\Controllers\BaseController;
 use App\Library\Http\Response\JsonResponse;
 use Carbon\Carbon;
 

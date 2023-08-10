@@ -2,7 +2,7 @@
 
 namespace App\Http\API\V1\Requests\Reaction;
 
-use App\Http\BaseRequest;
+use App\Http\API\V1\Requests\BaseRequest;
 
 class PostRequest extends BaseRequest
 {
