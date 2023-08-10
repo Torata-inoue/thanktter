@@ -25,7 +25,7 @@ readonly class SaveCommentService extends BaseService
      * @param string $text
      * @param int[] $nomineeIds
      * @param resource[] $images
-     * @return array{comment: Comment, reactions: array<int, int>[]}
+     * @return array{comment: Comment, reactions: array<int, array<string, int>>}
      * @throws \Throwable
      */
     public function createComment(string $text, array $nomineeIds, array $images): array
@@ -49,7 +49,7 @@ readonly class SaveCommentService extends BaseService
         });
 
         $comment->user = $this->auth;
-        $comment->replies = new Collection();
+        $comment->replies = new Collection();  // @phpstan-ignore-line
         $comment->nominees = $users;
 
         return [

@@ -23,7 +23,7 @@ class SaveCommentServiceTest extends TestCase
         $this->service = app(SaveCommentService::class);
     }
 
-    public function testSaveCommentAndNominees()
+    public function testSaveCommentAndNominees(): void
     {
         $nominee_ids = User::factory(5)->create()
             ->map(fn (User $user) => $user->id)->all();

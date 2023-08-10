@@ -13,9 +13,8 @@ class ReplyResourceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testResource()
+    public function testResource(): void
     {
-
         $comment = Comment::factory()->create(['user_id' => User::factory()->create()->id]);
         $replyUser = User::factory()->create();
         $reply = Comment::factory()->create([

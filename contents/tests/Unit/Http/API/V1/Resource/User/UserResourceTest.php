@@ -11,7 +11,7 @@ class UserResourceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testResource()
+    public function testResource(): void
     {
         $user = User::factory()->create();
         $actual = (new UserResource($user))->toJson();
