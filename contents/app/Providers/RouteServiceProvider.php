@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->group([
             'prefix' => 'admin',
-//            'middleware' => 'admin'
+            'middleware' => 'admin'
         ], function (Router $router) {
             require base_path('routes/admin.php');
         });

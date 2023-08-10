@@ -15,6 +15,7 @@ class GetAuthController extends BaseController
 
     public function getAuth(): JsonResponse
     {
-        return new JsonResponse(new UserResource($this->auth->user()));
+        $res = $this->auth->user() ? new UserResource($this->auth->user()) : [];
+        return new JsonResponse($res);
     }
 }
