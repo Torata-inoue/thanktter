@@ -2,7 +2,7 @@
 
 namespace App\Http\Web\Controllers\Top;
 
-use App\Http\BaseController;
+use App\Http\Web\Controllers\BaseController;
 use Illuminate\View\View;
 
 class TopBaseController extends BaseController

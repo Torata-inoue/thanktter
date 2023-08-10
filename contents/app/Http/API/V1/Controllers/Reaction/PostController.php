@@ -2,8 +2,8 @@
 
 namespace App\Http\API\V1\Controllers\Reaction;
 
+use App\Http\API\V1\Controllers\BaseController;
 use App\Http\API\V1\Requests\Reaction\PostRequest;
-use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 use Carbon\Carbon;
 

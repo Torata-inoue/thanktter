@@ -2,8 +2,8 @@
 
 namespace App\Http\API\V1\Controllers\User\List;
 
+use App\Http\API\V1\Controllers\BaseController;
 use App\Http\API\V1\Resources\User\UserResource;
-use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 use App\Service\User\ListService;
 

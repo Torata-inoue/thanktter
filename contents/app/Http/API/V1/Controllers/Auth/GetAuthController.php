@@ -2,8 +2,8 @@
 
 namespace App\Http\API\V1\Controllers\Auth;
 
+use App\Http\API\V1\Controllers\BaseController;
 use App\Http\API\V1\Resources\User\UserResource;
-use App\Http\BaseController;
 use App\Library\Http\Response\JsonResponse;
 use Illuminate\Auth\AuthManager;
 
@@ -15,6 +15,7 @@ class GetAuthController extends BaseController
 
     public function getAuth(): JsonResponse
     {
-        return new JsonResponse(new UserResource($this->auth->user()));
+        $res = $this->auth->user() ? new UserResource($this->auth->user()) : [];
+        return new JsonResponse($res);
     }
 }
