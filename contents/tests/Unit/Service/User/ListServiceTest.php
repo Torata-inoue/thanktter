@@ -4,10 +4,13 @@ namespace Service\User;
 
 use App\Domains\User\User;
 use App\Service\User\ListService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ListServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     private ListService $listService;
 
     public function setUp(): void

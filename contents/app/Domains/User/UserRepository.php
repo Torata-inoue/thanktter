@@ -17,6 +17,18 @@ class UserRepository extends CacheableRepository
     }
 
     /**
+     * @param int[] $user_ids
+     * @return Collection<int, User>
+     */
+    public function getByIds(array $user_ids): Collection
+    {
+        return $this->getQueryBuilder()
+            ->whereIn('id', $user_ids)
+            ->where('status', '=', User::STATUS_EXIST)
+            ->get();
+    }
+
+    /**
      * @return Collection<int, User>
      */
     public function getUsersByStatus(): Collection
