@@ -8,6 +8,5 @@ class ReactionResourceTest extends TestCase
 {
     public function testResource(): void
     {
-
     }
 }

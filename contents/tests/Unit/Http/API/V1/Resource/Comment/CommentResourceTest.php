@@ -10,5 +10,4 @@ class CommentResourceTest extends TestCase
     {
         //
     }
-
 }
