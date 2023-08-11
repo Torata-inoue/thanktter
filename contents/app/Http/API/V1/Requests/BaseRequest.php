@@ -25,7 +25,7 @@ class BaseRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    final public function authorize(): bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -37,9 +37,6 @@ class BaseRequest extends FormRequest
      */
     final public function rules(): array
     {
-        if ($this->request->has('data')) {
-            return ['data' => $this->rules];
-        }
         return $this->rules;
     }
 
@@ -69,16 +66,5 @@ class BaseRequest extends FormRequest
     protected function prepareValidate(Validator $validator): void
     {
         //
-    }
-
-    /**
-     * @return array<string, array<string>|string>
-     */
-    final public function getValidData(): array
-    {
-        if ($this->request->has('data')) {
-            return $this->validated('data');
-        }
-        return $this->validated();
     }
 }
