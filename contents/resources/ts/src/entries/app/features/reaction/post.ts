@@ -5,7 +5,4 @@ import { AuthType } from '../../../../common/constans/auth';
 
 type ReactionResponse = { auth: AuthType; comment: CommentType };
 type PostReactionType = (data: ReactionFormType) => Promise<ReactionResponse>;
-export const postReaction: PostReactionType = (data) =>
-  api<ReactionResponse>('/reaction', 'POST', {
-    data,
-  });
+export const postReaction: PostReactionType = (data) => api<ReactionResponse>('/reaction', 'POST', data);
