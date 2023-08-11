@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Domains\User\User;
+use Illuminate\Auth\AuthManager;
 
 readonly class BaseService
 {
@@ -10,6 +11,6 @@ readonly class BaseService
 
     public function __construct()
     {
-        $this->auth = app(User::class);
+        $this->auth = app(AuthManager::class)->user();
     }
 }

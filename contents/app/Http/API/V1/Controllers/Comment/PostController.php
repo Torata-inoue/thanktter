@@ -13,7 +13,7 @@ class PostController extends BaseController
     public function post(PostRequest $request, SaveCommentService $service): JsonResponse
     {
         $inputs = $request->only(['text', 'nomineeIds', 'images']);
-        $data = $service->createComment($inputs['text'], $inputs['nomineeIds'], $inputs['images']);
+        $data = $service->createComment($inputs['text'], $inputs['nomineeIds'], $inputs['images'] ?? []);
 
         return new JsonResponse(new CommentResource($data));
     }

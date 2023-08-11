@@ -16,9 +16,9 @@ readonly class ImageUploader implements UploaderInterface
     {
         $image = $this->imageManager->make($file->getRealPath());
         $name = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        $dir = config('common.image.base_path') . '/comment/';
+        $dir = 'app/public/' . config('common.image.base_path') . '/comment/';
 
-        $image->save(public_path("{$dir}{$name}"), self::QUALITY);
+        $image->save(storage_path("{$dir}{$name}"), self::QUALITY);
 
         return $name;
     }
