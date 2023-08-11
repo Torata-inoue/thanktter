@@ -14,7 +14,12 @@ export const CommentForm: React.FC = () => {
   const methods = useCommentForm();
 
   const onSubmitHandler: SubmitHandler<CommentFormType> = (data) => {
-    postCommentApi(data)
+    const formData = new FormData();
+    data.images.map((image) => formData.append('images[]', image));
+    data.nomineeIds.map((nomineeId) => formData.append('nomineeIds[]', nomineeId.toString()));
+    formData.append('text', data.text);
+
+    postCommentApi(formData)
       .then((res) => console.log(res))
       .catch(handleApiError);
   };
