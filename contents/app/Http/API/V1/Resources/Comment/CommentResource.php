@@ -38,7 +38,7 @@ class CommentResource extends BaseResource
         return [
             'id' => $comment->id,
             'text' => $comment->text,
-            'createdAt' => $comment->created_at->format('Y-m-d H:i:s'),
+            'createdAt' => $comment->created_at->format('Y/n/j G:i'),
             'user' => new UserResource($comment->user),
             'nominees' => UserResource::collection($comment->nominees),
             'reactions' => new ReactionResource($reactions),

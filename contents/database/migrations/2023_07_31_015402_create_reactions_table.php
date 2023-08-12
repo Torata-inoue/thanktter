@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('comment_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('target_id');
+            $table->unsignedTinyInteger('type');
             $table->timestamp('created_at');
 
             $table->index(['user_id', 'target_id']);

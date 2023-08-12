@@ -49,7 +49,7 @@ class Comment extends CacheableModel
 
     protected $visible = [
         'id', 'user_id', 'text', 'status', 'type', 'reply_to', 'created_at', 'updated_at',
-        'user', 'replies', 'nominees'
+        'user', 'replies', 'nominees', 'images'
     ];
 
     /**
