@@ -54,5 +54,4 @@ readonly class PostReactionService extends BaseService
 
         return $this->makeComment($comment, $reactions);
     }
-
 }
