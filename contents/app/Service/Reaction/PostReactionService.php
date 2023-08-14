@@ -42,6 +42,10 @@ readonly class PostReactionService extends BaseService
             throw new \Exception('ユーザーが見つかりません');
         }
 
+        if ($this->auth->stamina <= 0) {
+            throw new \Exception('スタミナが足りません');
+        }
+
         $reaction = new Reaction([
             'comment_id' => $comment_id,
             'user_id' => $this->auth->id,
