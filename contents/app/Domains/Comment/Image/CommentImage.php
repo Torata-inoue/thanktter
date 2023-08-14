@@ -28,6 +28,6 @@ class CommentImage extends Model
 
     public function getUrl(): string
     {
-        return asset("storage/images/common/{$this->name}");
+        return asset("storage/images/comment/{$this->name}");
     }
 }
