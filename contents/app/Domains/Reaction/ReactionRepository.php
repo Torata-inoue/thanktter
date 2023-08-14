@@ -29,4 +29,9 @@ class ReactionRepository extends Repository
             ->groupBy(['comment_id', 'type'])
             ->toArray();
     }
+
+    public function save(Reaction $reaction): bool
+    {
+        return $reaction->save();
+    }
 }
