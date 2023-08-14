@@ -39,6 +39,7 @@ class CommentRepository extends CacheableRepository
             ->withReplies()
             ->withImages()
             ->where('status', '=', Comment::STATUS_EXIST)
+            ->where('reply_to', '=', Comment::NOT_REPLY_COMMENT)
             ->offset($offset)
             ->limit($limit)
             ->orderBy('id', 'desc')
