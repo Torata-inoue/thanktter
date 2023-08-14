@@ -15,6 +15,17 @@ class CommentRepository extends CacheableRepository
         parent::__construct($comment);
     }
 
+    protected function findByIdFromDB(int $id): ?Comment
+    {
+        return $this->getQueryBuilder()
+            ->withUser()
+            ->withNominees()
+            ->withReplies()
+            ->withImages()
+            ->where('id', '=', $id)
+            ->first();
+    }
+
     /**
      * @param int $limit
      * @param int $offset

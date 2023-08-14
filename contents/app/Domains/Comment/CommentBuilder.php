@@ -16,7 +16,7 @@ class CommentBuilder extends Builder
 
     public function withReplies(): self
     {
-        return $this->with('hasManyReplies');
+        return $this->with('hasManyReplies.belongsToUser');
     }
 
     public function withNominees(): self
