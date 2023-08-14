@@ -66,3 +66,14 @@ export const useSetComment: UseSetCommentType = (commentId) => {
     [setComment]
   );
 };
+
+type UseAddCommentType = () => (comment: CommentType) => void;
+export const useAddComment: UseAddCommentType = () => {
+  const setComment = useSetRecoilState(commentsState(1));
+  return useCallback(
+    (comment) => {
+      setComment((currVal) => [comment, ...currVal]);
+    },
+    [setComment]
+  );
+};

@@ -17,4 +17,5 @@ export type CommentType = {
     [name in ReactionKeyType]: number;
   };
   replies: ReplyType[];
+  images: string[];
 };

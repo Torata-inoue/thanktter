@@ -9,9 +9,11 @@ import { postCommentApi } from '../../../features/comment/post';
 import { handleApiError } from '../../../../../common/utils/api';
 import { ImageUploader } from './image/ImageUploader';
 import { Form } from '../../../../../common/components/form/Form';
+import { useAddComment } from '../../../states/atoms/comment';
 
 export const CommentForm: React.FC = () => {
   const methods = useCommentForm();
+  const addComment = useAddComment();
 
   const onSubmitHandler: SubmitHandler<CommentFormType> = (data) => {
     const formData = new FormData();
@@ -20,7 +22,10 @@ export const CommentForm: React.FC = () => {
     formData.append('text', data.text);
 
     postCommentApi(formData)
-      .then((res) => console.log(res))
+      .then((res) => {
+        addComment(res);
+        methods.reset();
+      })
       .catch(handleApiError);
   };
 
