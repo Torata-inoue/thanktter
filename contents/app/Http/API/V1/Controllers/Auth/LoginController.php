@@ -22,7 +22,7 @@ class LoginController extends BaseController
      */
     public function __invoke(LoginRequest $request): JsonResponse
     {
-        $data = $request->getValidData();
+        $data = $request->only(['email', 'password']);
 
         if ($this->auth->guard()->attempt($data)) {
             $request->session()->regenerate();

@@ -3,6 +3,7 @@
 namespace App\Domains\Comment;
 
 use App\Domains\Cache\CacheableModel;
+use App\Domains\Comment\Image\CommentImage;
 use App\Domains\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property User $user
  * @property Collection<int, Comment> $replies
  * @property Collection<int, User> $nominees
+ * @property Collection<int, CommentImage> $images
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -47,7 +49,7 @@ class Comment extends CacheableModel
 
     protected $visible = [
         'id', 'user_id', 'text', 'status', 'type', 'reply_to', 'created_at', 'updated_at',
-        'user', 'replies', 'nominees'
+        'user', 'replies', 'nominees', 'images'
     ];
 
     /**
@@ -128,6 +130,30 @@ class Comment extends CacheableModel
                 return $this->belongsToManyNominees;
             },
             set: fn (Collection $nominees) => $this->setRelation('belongsToManyNominees', $nominees)
+        );
+    }
+
+    /**
+     * @return HasMany<CommentImage>
+     */
+    public function hasManyImages(): HasMany
+    {
+        return $this->hasMany(CommentImage::class);
+    }
+
+    /**
+     * @return Attribute<Collection<int, CommentImage>, void>
+     */
+    public function images(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->relationLoaded('hasManyImages')) {
+                    throw new RelationNotFoundException();
+                }
+                return $this->hasManyImages;
+            },
+            set: fn (Collection $images) => $this->setRelation('hasManyImages', $images)
         );
     }
 }

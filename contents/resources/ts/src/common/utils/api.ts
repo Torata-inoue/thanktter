@@ -44,14 +44,15 @@ type ResponseData<T> = {
 type AxiosErrorDataType = {
   message: string;
 };
-async function api<T>(path: string, method: 'GET' | 'POST', config?: AxiosRequestConfig): Promise<T> {
+async function api<T>(path: string, method: 'GET' | 'POST', data?: any, config?: AxiosRequestConfig): Promise<T> {
   let response: AxiosResponse<ResponseData<T>>;
 
   try {
     if (method === 'GET') {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       response = await axios.get(`${getViteEnv('endpoint')}${path}`, config);
     } else {
-      response = await axios.post(`${getViteEnv('endpoint')}${path}`, config);
+      response = await axios.post(`${getViteEnv('endpoint')}${path}`, data, config);
     }
   } catch (error) {
     if (error instanceof AxiosError<AxiosErrorDataType, unknown>) {

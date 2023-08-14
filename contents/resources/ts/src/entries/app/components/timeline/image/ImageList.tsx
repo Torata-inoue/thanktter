@@ -33,7 +33,7 @@ const calcImageHeight: CalcImageHeightType = (length) => {
   return imageHeight;
 };
 
-type ImageListProps = { imageFiles: File[]; removeImage: (index: number) => void };
+type ImageListProps = { imageFiles: File[] | string[]; removeImage?: (index: number) => void };
 export const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [src, setSrc] = useState<string | undefined>(undefined);
@@ -49,7 +49,9 @@ export const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage })
 
   const handleOnRemove: (index: number) => React.MouseEventHandler<HTMLButtonElement> = (index) => (event) => {
     event.stopPropagation();
-    removeImage(index);
+    if (removeImage) {
+      removeImage(index);
+    }
   };
 
   const handleOnClose: () => void = () => {
@@ -63,18 +65,20 @@ export const ImageList: React.FC<ImageListProps> = ({ imageFiles, removeImage })
         cols={2}
         rowHeight={125}
       >
-        {imageFiles.map((file, index) => {
-          const imageUrl = URL.createObjectURL(file);
+        {imageFiles.map((image, index) => {
+          const imageUrl = image instanceof File ? URL.createObjectURL(image) : image;
           return (
-            <MuiImageListItem key={file.name} onClick={handleOnClick(imageUrl)}>
-              <img src={imageUrl} alt={file.name} loading="lazy" style={{ objectFit: 'cover' }} />
-              <IconButton
-                sx={{ position: 'absolute', top: 2, right: 2, zIndex: 1 }}
-                size="small"
-                onClick={handleOnRemove(index)}
-              >
-                <DeleteOutline />
-              </IconButton>
+            <MuiImageListItem key={imageUrl} onClick={handleOnClick(imageUrl)}>
+              <img src={imageUrl} alt={`image-${index}`} loading="lazy" style={{ objectFit: 'cover' }} />
+              {removeImage && (
+                <IconButton
+                  sx={{ position: 'absolute', top: 2, right: 2, zIndex: 1 }}
+                  size="small"
+                  onClick={handleOnRemove(index)}
+                >
+                  <DeleteOutline />
+                </IconButton>
+              )}
             </MuiImageListItem>
           );
         })}

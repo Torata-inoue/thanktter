@@ -8,6 +8,7 @@ import { ReactionsBar } from './cardContent/reaction/ReactionsBar';
 import { ReplyUserIcons } from './cardContent/reply/ReplyUserIcons';
 import { ReplyForm } from './cardContent/reply/form/ReplyForm';
 import { Replies } from './cardContent/reply/Replies';
+import { ImageList } from '../image/ImageList';
 
 type CommentCardProps = CommentType;
 export const CommentCard: React.FC<CommentCardProps> = ({
@@ -18,6 +19,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
   replies,
   reactions,
   nominees,
+  images,
 }) => {
   const [openReply, setOpenReply] = useState<boolean>(true);
   const handleReplyClick = () => setOpenReply((prev) => !prev);
@@ -28,6 +30,7 @@ export const CommentCard: React.FC<CommentCardProps> = ({
         <User {...user} />
         <TextDiv textAlign="right">{createdAt}</TextDiv>
         <TextDiv>{text}</TextDiv>
+        <ImageList imageFiles={images} />
         <Nominees nominees={nominees} commentId={id} />
         <ReactionsBar reactions={reactions} />
       </CardContent>

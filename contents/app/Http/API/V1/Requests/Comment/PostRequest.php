@@ -11,12 +11,16 @@ class PostRequest extends BaseRequest
         'nomineeIds' => ['required', 'array', 'max:10'],
         'nomineeIds.*' => ['required', 'int', 'min:0'],
         'images' => ['array', 'max:4'],
-        'images.*' => ['string'],
+        'images.*' => ['image'],
     ];
 
     protected array $formAttributes = [
         'text' => 'コメント本文',
         'nomineeIds' => '推薦者',
         'images' => '画像',
+        'images.0' => '画像',
+        'images.1' => '画像',
+        'images.2' => '画像',
+        'images.3' => '画像',
     ];
 }

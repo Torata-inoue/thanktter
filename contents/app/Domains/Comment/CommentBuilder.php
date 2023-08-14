@@ -23,4 +23,9 @@ class CommentBuilder extends Builder
     {
         return $this->with('belongsToManyNominees');
     }
+
+    public function withImages(): self
+    {
+        return $this->with('hasManyImages');
+    }
 }
