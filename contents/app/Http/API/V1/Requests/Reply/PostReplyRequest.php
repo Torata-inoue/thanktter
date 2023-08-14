@@ -7,7 +7,7 @@ use App\Http\API\V1\Requests\BaseRequest;
 class PostReplyRequest extends BaseRequest
 {
     protected array $rules = [
-        'commendId' => ['required', 'int'],
+        'commentId' => ['required', 'int'],
         'text' => ['required', 'string', 'max:500'],
     ];
 

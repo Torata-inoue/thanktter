@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property int $user_id
  * @property string $text
- * @property int $string
  * @property int $type
  * @property int $reply_to
  * @property User $user
@@ -77,7 +76,7 @@ class Comment extends CacheableModel
         return Attribute::make(
             get: function () {
                 if (!$this->relationLoaded('belongsToUser')) {
-                    throw new RelationNotFoundException();
+                    throw new RelationNotFoundException('belongsToUser Not Found');
                 }
                 return $this->belongsToUser;
             },
@@ -101,7 +100,7 @@ class Comment extends CacheableModel
         return Attribute::make(
             get: function () {
                 if (!$this->relationLoaded('hasManyReplies')) {
-                    throw new RelationNotFoundException();
+                    throw new RelationNotFoundException('hasManyReplies Not Found');
                 }
                 return $this->hasManyReplies;
             },
@@ -125,7 +124,7 @@ class Comment extends CacheableModel
         return Attribute::make(
             get: function () {
                 if (!$this->relationLoaded('belongsToManyNominees')) {
-                    throw new RelationNotFoundException();
+                    throw new RelationNotFoundException('belongsToManyNominees Not Found');
                 }
                 return $this->belongsToManyNominees;
             },
@@ -149,7 +148,7 @@ class Comment extends CacheableModel
         return Attribute::make(
             get: function () {
                 if (!$this->relationLoaded('hasManyImages')) {
-                    throw new RelationNotFoundException();
+                    throw new RelationNotFoundException('hasManyImages Not Found');
                 }
                 return $this->hasManyImages;
             },

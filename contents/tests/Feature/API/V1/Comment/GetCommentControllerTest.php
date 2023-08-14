@@ -11,9 +11,8 @@ class GetCommentControllerTest extends TestCase
         $this->actingAsSanctum();
     }
 
-    public function testGetComment()
+    public function testGetComment(): void
     {
-
         $response = $this->get(parent::V1_ENDPOINT . '/comment?page=1');
         $response->assertStatus(200);
     }

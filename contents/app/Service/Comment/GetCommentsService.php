@@ -5,11 +5,13 @@ namespace App\Service\Comment;
 use App\Domains\Comment\Comment;
 use App\Domains\Comment\CommentRepository;
 use App\Domains\Reaction\ReactionRepository;
-use App\Domains\Reaction\ReactionType;
+use App\Service\MakeCommentTrait;
 use Illuminate\Database\Eloquent\Collection;
 
 readonly class GetCommentsService
 {
+    use MakeCommentTrait;
+
     const PER_PAGE = 20;
 
     public function __construct(
@@ -30,13 +32,7 @@ readonly class GetCommentsService
         $comments = $this->getComments($page);
         $reactions = $this->getReactions($comments->pluck('id')->all());
 
-        return $comments->map(fn (Comment $comment) => [
-            'comment' => $comment,
-            'reactions' => array_map(fn (ReactionType $type) => [
-                'type' => $type->value,
-                'count' => $this->arrayGetReaction($reactions, $comment->id, $type)
-            ], ReactionType::cases()),
-        ])->all();
+        return $comments->map(fn (Comment $comment) => $this->makeComment($comment, $reactions))->all();
     }
 
     /**
@@ -56,16 +52,5 @@ readonly class GetCommentsService
     private function getReactions(array $comment_ids): array
     {
         return $this->reactionRepository->countReactionsGroupByTypeByCommentIds($comment_ids);
-    }
-
-    /**
-     * @param array<int, array<int, array{count: int}>> $reactions
-     * @param int $comment_id
-     * @param ReactionType $type
-     * @return int
-     */
-    private function arrayGetReaction(array $reactions, int $comment_id, ReactionType $type): int
-    {
-        return $reactions[$comment_id][$type->value]['count'] ?? 0;
     }
 }
