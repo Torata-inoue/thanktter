@@ -37,4 +37,9 @@ class UserRepository extends CacheableRepository
             ->where('status', '=', User::STATUS_EXIST)
             ->get();
     }
+
+    public function save(User $user): bool
+    {
+        return $user->save();
+    }
 }

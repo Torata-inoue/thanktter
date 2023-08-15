@@ -7,6 +7,7 @@ use App\Domains\Comment\CommentRepository;
 use App\Domains\Reaction\Reaction;
 use App\Domains\Reaction\ReactionRepository;
 use App\Domains\Reaction\ReactionType;
+use App\Domains\User\User;
 use App\Domains\User\UserRepository;
 use App\Service\BaseService;
 use App\Service\MakeCommentTrait;
@@ -45,6 +46,9 @@ readonly class PostReactionService extends BaseService
         if ($this->auth->stamina <= 0) {
             throw new \Exception('スタミナが足りません');
         }
+
+        $this->auth->stamina--;
+        $this->userRepository->save($this->auth);
 
         $reaction = new Reaction([
             'comment_id' => $comment_id,
