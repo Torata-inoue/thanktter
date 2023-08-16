@@ -15,21 +15,6 @@ class ReactionRepository extends Repository
         parent::__construct($reaction);
     }
 
-    /**
-     * @param int[] $comment_ids
-     * @return array<int, array<int, array{count: int}>>
-     */
-    public function countReactionsGroupByTypeByCommentIds(array $comment_ids): array
-    {
-        return $this->getQueryBuilder()
-            ->selectRaw('`comment_id`, `type`, COUNT(*) as count')
-            ->whereIn('comment_id', $comment_ids)
-            ->groupBy(['comment_id', 'type'])
-            ->get()
-            ->groupBy(['comment_id', 'type'])
-            ->toArray();
-    }
-
     public function save(Reaction $reaction): bool
     {
         return $reaction->save();

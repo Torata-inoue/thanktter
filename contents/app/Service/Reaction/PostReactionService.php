@@ -7,15 +7,11 @@ use App\Domains\Comment\CommentRepository;
 use App\Domains\Reaction\Reaction;
 use App\Domains\Reaction\ReactionRepository;
 use App\Domains\Reaction\ReactionType;
-use App\Domains\User\User;
 use App\Domains\User\UserRepository;
 use App\Service\BaseService;
-use App\Service\MakeCommentTrait;
 
 readonly class PostReactionService extends BaseService
 {
-    use MakeCommentTrait;
-
     public function __construct(
         private CommentRepository $commentRepository,
         private UserRepository $userRepository,
@@ -28,10 +24,10 @@ readonly class PostReactionService extends BaseService
      * @param int $comment_id
      * @param int $target_id
      * @param ReactionType $reactionType
-     * @return array{comment: Comment, reactions: array<array{type: int, count: int}>}
+     * @return Comment
      * @throws \Exception
      */
-    public function createReaction(int $comment_id, int $target_id, ReactionType $reactionType): array
+    public function createReaction(int $comment_id, int $target_id, ReactionType $reactionType): Comment
     {
         $comment = $this->commentRepository->findById($comment_id);
         if (!$comment) {
@@ -58,8 +54,14 @@ readonly class PostReactionService extends BaseService
         ]);
         $this->reactionRepository->save($reaction);
 
-        $reactions = $this->reactionRepository->countReactionsGroupByTypeByCommentIds([$comment_id]);
+        $comment->reactions->transform(function (Reaction $reaction) use ($reactionType) {
+            if ($reaction->type === $reactionType->value) {
+                // @phpstan-ignore-next-line
+                $reaction->count++;
+            }
+            return $reaction;
+        });
 
-        return $this->makeComment($comment, $reactions);
+        return $comment;
     }
 }

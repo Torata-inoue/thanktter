@@ -184,7 +184,7 @@ class Comment extends CacheableModel
                 }
                 return $this->hasManyReactions;
             },
-            set: fn (array $reactions) => $this->setRelation('hasManyReactions', $reactions)
+            set: fn (Collection $reactions) => $this->setRelation('hasManyReactions', $reactions)
         );
     }
 }
