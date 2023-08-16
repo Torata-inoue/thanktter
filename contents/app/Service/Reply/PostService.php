@@ -22,6 +22,7 @@ readonly class PostService extends BaseService
      */
     public function createReply(int $comment_id, string $text): Comment
     {
+        $this->commentRepository->setUseCache(false);
         $parentComment = $this->commentRepository->findById($comment_id);
         if (!$parentComment) {
             throw new \Exception('データが存在しません');

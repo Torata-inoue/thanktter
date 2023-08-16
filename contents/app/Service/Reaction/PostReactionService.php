@@ -29,6 +29,7 @@ readonly class PostReactionService extends BaseService
      */
     public function createReaction(int $comment_id, int $target_id, ReactionType $reactionType): Comment
     {
+        $this->commentRepository->setUseCache(false);
         $comment = $this->commentRepository->findById($comment_id);
         if (!$comment) {
             throw new \Exception('コメントが見つかりません');
