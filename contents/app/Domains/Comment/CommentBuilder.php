@@ -28,4 +28,18 @@ class CommentBuilder extends Builder
     {
         return $this->with('hasManyImages');
     }
+
+    public function withReactions(): self
+    {
+        return $this->with('hasManyReactions');
+    }
+
+    public function withRelations(): self
+    {
+        return $this->withUser()
+            ->withReplies()
+            ->withNominees()
+            ->withImages()
+            ->withReactions();
+    }
 }
