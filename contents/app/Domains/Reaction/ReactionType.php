@@ -10,14 +10,8 @@ enum ReactionType: int
     case CONGRATULATION = 4;
     case FIGHT = 5;
 
-    public function getText(): string
+    public function getLowerText(): string
     {
-        return match ($this) {
-            self::GOOD => 'good',
-            self::EMPATHY => 'empathy',
-            self::THANKS => 'thanks',
-            self::CONGRATULATION => 'congratulation',
-            self::FIGHT => 'fight',
-        };
+        return strtolower($this->name);
     }
 }

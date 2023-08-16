@@ -13,8 +13,8 @@ class GetController extends BaseController
     public function getComments(GetCommentsRequest $request, GetCommentsService $service): JsonResponse
     {
         $page = $request->integer('page');
-        $list = $service->getList($page);
+        $comments = $service->getComments($page);
 
-        return new JsonResponse(CommentResource::collection($list));
+        return new JsonResponse(CommentResource::collection($comments));
     }
 }

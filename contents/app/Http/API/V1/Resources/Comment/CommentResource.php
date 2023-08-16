@@ -11,10 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * @extends BaseResource<array{
- *     comment: Comment,
- *     reactions: array<array{type: int, count: int}>
- *     }>
+ * @extends BaseResource<Comment>
  */
 class CommentResource extends BaseResource
 {
@@ -32,19 +29,15 @@ class CommentResource extends BaseResource
      */
     public function toArray(Request $request): array
     {
-        /** @var Comment $comment */
-        $comment = $this->resource['comment'];
-        /** @var array<array{type: int, count: int}> $reactions */
-        $reactions = $this->resource['reactions'];
         return [
-            'id' => $comment->id,
-            'text' => $comment->text,
-            'createdAt' => $comment->created_at->format('Y/n/j G:i'),
-            'user' => new UserResource($comment->user),
-            'nominees' => UserResource::collection($comment->nominees),
-            'reactions' => new ReactionResource($reactions),
-            'replies' => ReplyResource::collection($comment->replies),
-            'images' => $comment->images->map(fn (CommentImage $commentImage) => $commentImage->getUrl())
+            'id' => $this->resource->id,
+            'text' => $this->resource->text,
+            'createdAt' => $this->resource->created_at->format('Y/n/j G:i'),
+            'user' => new UserResource($this->resource->user),
+            'nominees' => UserResource::collection($this->resource->nominees),
+            'reactions' => new ReactionResource($this->resource->reactions),
+            'replies' => ReplyResource::collection($this->resource->replies),
+            'images' => $this->resource->images->map(fn (CommentImage $commentImage) => $commentImage->getUrl())
         ];
     }
 }

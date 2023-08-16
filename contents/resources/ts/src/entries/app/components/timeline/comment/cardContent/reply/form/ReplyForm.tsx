@@ -16,7 +16,10 @@ const Component: React.FC<ReplyFormProps> = ({ commentId }) => {
 
   const onSubmit: SubmitHandler<ReplyFormType> = (data) => {
     postReplyApi(data)
-      .then((res) => setComment(res))
+      .then((res) => {
+        setComment(res);
+        methods.reset();
+      })
       .catch(handleApiError);
   };
 

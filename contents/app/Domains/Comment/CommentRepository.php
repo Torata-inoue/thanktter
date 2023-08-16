@@ -18,10 +18,7 @@ class CommentRepository extends CacheableRepository
     protected function findByIdFromDB(int $id): ?Comment
     {
         return $this->getQueryBuilder()
-            ->withUser()
-            ->withNominees()
-            ->withReplies()
-            ->withImages()
+            ->withRelations()
             ->where('id', '=', $id)
             ->first();
     }
@@ -34,10 +31,7 @@ class CommentRepository extends CacheableRepository
     public function getComments(int $limit, int $offset): Collection
     {
         return $this->getQueryBuilder()
-            ->withUser()
-            ->withNominees()
-            ->withReplies()
-            ->withImages()
+            ->withRelations()
             ->where('status', '=', Comment::STATUS_EXIST)
             ->where('reply_to', '=', Comment::NOT_REPLY_COMMENT)
             ->offset($offset)

@@ -4,6 +4,7 @@ namespace App\Domains\Comment;
 
 use App\Domains\Cache\CacheableModel;
 use App\Domains\Comment\Image\CommentImage;
+use App\Domains\Reaction\Reaction;
 use App\Domains\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Collection<int, Comment> $replies
  * @property Collection<int, User> $nominees
  * @property Collection<int, CommentImage> $images
+ * @property Collection<int, Reaction> $reactions
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -89,7 +91,9 @@ class Comment extends CacheableModel
      */
     public function hasManyReplies(): HasMany
     {
-        return $this->hasMany(Comment::class, 'reply_to');
+        return $this->hasMany(Comment::class, 'reply_to')
+            ->where('status', '=', self::STATUS_EXIST)
+            ->orderBy('id', 'desc');
     }
 
     /**
@@ -113,7 +117,8 @@ class Comment extends CacheableModel
      */
     public function belongsToManyNominees(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'nominees', 'comment_id', 'user_id');
+        return $this->belongsToMany(User::class, 'nominees', 'comment_id', 'user_id')
+            ->where('users.status', '=', User::STATUS_EXIST);
     }
 
     /**
@@ -137,7 +142,8 @@ class Comment extends CacheableModel
      */
     public function hasManyImages(): HasMany
     {
-        return $this->hasMany(CommentImage::class);
+        return $this->hasMany(CommentImage::class)
+            ->where('status', '=', CommentImage::STATUS_EXIST);
     }
 
     /**
@@ -153,6 +159,32 @@ class Comment extends CacheableModel
                 return $this->hasManyImages;
             },
             set: fn (Collection $images) => $this->setRelation('hasManyImages', $images)
+        );
+    }
+
+    /**
+     * @return HasMany<Reaction>
+     */
+    public function hasManyReactions(): HasMany
+    {
+        return $this->hasMany(Reaction::class)
+            ->selectRaw('`comment_id`, `type`, COUNT(*) as count')
+            ->groupBy(['comment_id', 'type']);
+    }
+
+    /**
+     * @return Attribute<Collection<int, Reaction>, void>
+     */
+    public function reactions(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->relationLoaded('hasManyReactions')) {
+                    throw new RelationNotFoundException('hasManyReactions Not Found');
+                }
+                return $this->hasManyReactions;
+            },
+            set: fn (Collection $reactions) => $this->setRelation('hasManyReactions', $reactions)
         );
     }
 }
